@@ -41,6 +41,17 @@ class ProgStartTime(models.Model):
             return f'{self.name} - {self.description} | (Wyłączony)'
 
 
+def int_tim_str(n):
+    try:
+        n = int(n)
+    except ValueError:
+        n = 1
+    if n < 10:
+        return f'0{n}'
+    else:
+        return str(n)
+
+
 def sec_to_tim(sec):
     try:
         s = int(sec)
