@@ -1,0 +1,11 @@
+doc/
+.idea/
+__pycache__/
+*.py[cod]
+*$py.class
+env/
+venv/
+*.swp
+*.*.swp
+*.log
+local_*.py
