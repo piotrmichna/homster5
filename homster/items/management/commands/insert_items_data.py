@@ -1,6 +1,6 @@
 # from django.core.management import BaseCommand
-from items.management.commands_data.items_data import (ITEMS_NAME, BUSS_NAME, BUSS_PIN)
-from items.models import (ItemName, BussNameType, BussPinType)
+from items.management.commands_data.items_data import (ITEMS_NAME, BUSS_NAME, BUSS_PIN, GPIO_PIN_DATA)
+from items.models import (ItemName, BussNameType, BussPinType, GpioPinCfg)
 
 
 def insert_items_name():
@@ -26,3 +26,10 @@ def insert_buss_pin():
                 buss = BussNameType.objects.get(name=b)
                 BussPinType.objects.create(items_name=item_n, buss_name=buss, name=n,
                                            description=d, pin_board=p)
+
+
+def insert_gpio_pin():
+    for bn, n, d, p, do, v, vd in GPIO_PIN_DATA:
+        buss_p = BussPinType.objects.get(name=bn)
+        GpioPinCfg.objects.create(buss_pin=buss_p, name=n, description=d, pin_board=p, dir_out=do,
+                                  val=v, val_default=vd)
