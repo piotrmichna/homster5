@@ -27,12 +27,15 @@
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
             }
+
+
         }
+
     </style>
 
     <link href="/static/css/jumbotron.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-image: url(/static/img/1920x1080.png);">
 {% block navbar %}
     <nav class="navbar navbar-expand-md navbar-light fixed-top bg-info">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -69,7 +72,7 @@
 <main role="main">
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="jumbotron" style="opacity: 0.85">
         <div class="container">
             {% block header %}
                 <h1 class="display-3">Hello, world!</h1>

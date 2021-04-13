@@ -1,31 +1,32 @@
 {% extends "base.html" %}
 {% block title %} {% endblock %}
 {% block navbar %}
-    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-info">
-        <a class="navbar-brand" href="#">Navbar</a>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #ba8b00;opacity: 0.7">
+        <a class="navbar-brand" href="#">Homster5</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
                 aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault" style="opacity: 1">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Programy <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">Pogoda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link" href="#">Ustawienia</a>
                 </li>
-                <li class="nav-item dropdown">
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>#}
+{#                </li>#}
+                <li class="nav-item dropdown" style="opacity: 1">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                       aria-haspopup="true"
-                       aria-expanded="false">Dropdown</a>
+                       aria-haspopup="true" aria-expanded="false">User</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Ustawienia</a>
+                        <a class="dropdown-item" href="#">Wyloguj</a>
                     </div>
                 </li>
             </ul>
@@ -43,7 +44,7 @@
 {% endblock %}
 {% block content %}
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 bg-white" style="border-radius: 15px; opacity: 0.7;padding: 15px">
             <h2>Heading</h2>
             <p>Will you do the same for me? It's time to face the music I'm no longer your muse. Heard it's
                 beautiful, be the judge and my girls gonna take a vote. I can feel a phoenix inside of me.
@@ -51,7 +52,7 @@
                 jealous of our love, angels are crying from up above. Yeah, you take me to utopia.</p>
             <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 bg-white" style="border-radius: 15px; opacity: 0.7;padding: 15px">
             <h2>Heading</h2>
             <p>Standing on the frontline when the bombs start to fall. Heaven is jealous of our love, angels are
                 crying from up above. Can't replace you with a million rings. Boy, when you're with me I'll give
@@ -61,7 +62,7 @@
                 is the head that wears the crown.</p>
             <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 bg-white" style="border-radius: 15px; opacity: 0.7;padding: 15px">
             <h2>Heading</h2>
             <p>Playing ping pong all night long, everything's all neon and hazy. Yeah, she's so in demand. She's
                 sweet as pie but if you break her heart. But down to earth. It's time to face the music I'm no
