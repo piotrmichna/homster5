@@ -1,5 +1,7 @@
 from django.db import models
 
+from items.models import GpioPinCfg
+
 
 class ProgName(models.Model):
     class Meta:
@@ -37,3 +39,19 @@ class ProgStartTime(models.Model):
             return f'{self.name} - {self.description} | (Aktywny)'
         else:
             return f'{self.name} - {self.description} | (Wyłączony)'
+
+
+class ProgPinCfg(models.Model):
+    class Meta:
+        verbose_name = "Program - urządzenia"
+        verbose_name_plural = '6 Programy - urządzenia'
+        ordering = ['lp']
+
+    prog = models.ForeignKey(ProgName, on_delete=models.CASCADE, verbose_name='Dla programu')
+    pin_cfg = models.ForeignKey(GpioPinCfg, on_delete=models.CASCADE, verbose_name='Pin sterujący')
+    lp = models.PositiveSmallIntegerField(default=0, verbose_name='Kolejność')
+    duration_sec = models.PositiveSmallIntegerField(default=1, verbose_name='Czas trwania [s]')
+
+    def __str__(self):
+        dur_time = sec_to_tim(self.duration_sec)
+        return f'{self.pin_cfg.name} - {dur_time} | (Aktywny)'
