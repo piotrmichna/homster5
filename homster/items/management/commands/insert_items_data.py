@@ -1,4 +1,4 @@
-# from django.core.management import BaseCommand
+from django.core.management import BaseCommand
 from items.management.commands_data.items_data import (ITEMS_NAME, BUSS_NAME, BUSS_PIN, GPIO_PIN_DATA)
 from items.models import (ItemName, BussNameType, BussPinType, GpioPinCfg)
 
@@ -33,3 +33,14 @@ def insert_gpio_pin():
         buss_p = BussPinType.objects.get(name=bn)
         GpioPinCfg.objects.create(buss_pin=buss_p, name=n, description=d, pin_board=p, dir_out=do,
                                   val=v, val_default=vd)
+
+
+class Command(BaseCommand):
+    help = 'Wstawienie danych urządzeń do bazy.'
+
+    def handle(self, *args, **options):
+        insert_items_name()
+        insert_buss_name()
+        insert_buss_pin()
+        insert_gpio_pin()
+        print('Pomyślnie dodano testowe dane do bazy.')
