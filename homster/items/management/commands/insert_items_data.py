@@ -43,4 +43,4 @@ class Command(BaseCommand):
         insert_buss_name()
         insert_buss_pin()
         insert_gpio_pin()
-        print('Pomyślnie dodano testowe dane do bazy.')
+        print('Pomyślnie dodano dane urządzeń do bazy.')
