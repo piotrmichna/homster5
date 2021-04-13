@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from programs.models import ProgName, ProgStartTime, ProgPinCfg
+
+admin.site.register(ProgName)
+admin.site.register(ProgStartTime)
+admin.site.register(ProgPinCfg)
