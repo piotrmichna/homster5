@@ -41,6 +41,23 @@ class ProgStartTime(models.Model):
             return f'{self.name} - {self.description} | (Wyłączony)'
 
 
+def sec_to_tim(sec):
+    try:
+        s = int(sec)
+    except ValueError:
+        s = 1
+    m = 0
+    h = 0
+    if sec > 59:
+        m = sec // 60
+        s = sec - m * 60
+        if m > 59:
+            h = m // 60
+            m = m - h * 60
+
+    return int_tim_str(h) + ":" + int_tim_str(m) + ":" + int_tim_str(s)
+
+
 class ProgPinCfg(models.Model):
     class Meta:
         verbose_name = "Program - urządzenia"
