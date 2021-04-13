@@ -44,3 +44,24 @@ class BussPinType(models.Model):
 
     def __str__(self):
         return f'{self.items_name.name} | [{self.pin_board}] | {self.buss_name.name} - {self.name}'
+
+
+class GpioPinCfg(models.Model):
+    class Meta:
+        verbose_name = 'Konfiguracja modułu'
+        verbose_name_plural = '4 Konfiguracja modułów'
+        ordering = ['name']
+
+    buss_pin = models.ForeignKey(BussPinType, on_delete=models.CASCADE, verbose_name='IO sterownika')
+    name = models.CharField(max_length=16, null=True, verbose_name='Nazwa modułu')
+    description = models.CharField(max_length=48, null=True, verbose_name='Opis modułu')
+    pin_board = models.PositiveSmallIntegerField(null=False, verbose_name='Numer pinu')
+    dir_out = models.BooleanField(null=False, default=True, verbose_name='Kierunek wyjściowy')
+    val = models.PositiveSmallIntegerField(null=True, verbose_name='Stan aktualny')
+    val_default = models.PositiveSmallIntegerField(null=True, verbose_name='Wartość domyślna')
+
+    def __str__(self):
+        if self.dir_out:
+            return f'{self.name} | [{self.pin_board}]out | {self.description}'
+        else:
+            return f'{self.name} ({self.pin_board})in  | {self.description}'
