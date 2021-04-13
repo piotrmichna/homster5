@@ -55,7 +55,7 @@ ROOT_URLCONF = 'homster.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, '../items/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,14 +105,20 @@ USE_I18N = True
 
 USE_L10N = True
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = ''
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 try:
-    from homster.local_settings import (LANGUAGE_CODE, TIME_ZONE, STATIC_URL, STATICFILES_DIRS, ALLOWED_HOSTS,
+    from homster.local_settings import (LANGUAGE_CODE, TIME_ZONE, STATIC_URL, ALLOWED_HOSTS,
                                         DATABASES)
 except ModuleNotFoundError:
     print('Brak konfiguracji bazy danych w pliku local_settings.py!')
