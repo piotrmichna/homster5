@@ -28,3 +28,19 @@ class BussNameType(models.Model):
 
     def __str__(self):
         return f'{self.items_name.name} | {self.name} | {self.description}'
+
+
+class BussPinType(models.Model):
+    class Meta:
+        verbose_name = 'Magistrala - pin'
+        verbose_name_plural = '3 Magistrale - piny'
+        ordering = ['items_name__name', 'pin_board']
+
+    items_name = models.ForeignKey(ItemName, on_delete=models.CASCADE, verbose_name='Urządzenie')
+    buss_name = models.ForeignKey(BussNameType, on_delete=models.CASCADE, verbose_name='Magistrala')
+    name = models.CharField(max_length=16, verbose_name='Nazwa pinu')
+    description = models.CharField(max_length=48, verbose_name='Opis pinu')
+    pin_board = models.PositiveSmallIntegerField(verbose_name='Numer pinu')
+
+    def __str__(self):
+        return f'{self.items_name.name} | [{self.pin_board}] | {self.buss_name.name} - {self.name}'
