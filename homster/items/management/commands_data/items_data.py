@@ -63,3 +63,8 @@ BUSS_PIN = [
     ['raspberry', 'GND', 'Masa', 39, 'Supply'],
     ['raspberry', 'BOARD40', 'IN/OUT', 40, 'GPIO'],
 ]
+
+GPIO_PIN_DATA = [
+    ['BOARD19', 'Sekcja 1', 'Nawadnianie sekcja 1', 19, True, 0, 1],
+    ['BOARD21', 'Sekcja 2', 'Nawadnianie sekcja 2', 21, True, 0, 1],
+]
