@@ -22,4 +22,5 @@ class CfgCommand(models.Model):
 
     type = models.ForeignKey(CfgType, on_delete=models.CASCADE, verbose_name='Typ komendy')
     name = models.CharField(max_length=16, verbose_name='Komenda')
+    description = models.CharField(max_length=64, null=True, verbose_name='Opis polecenia')
     value = models.CharField(max_length=16, verbose_name='Wartość')
