@@ -1,7 +1,14 @@
 from django.core.management import BaseCommand
+
 from items.management.commands_data.items_data import (ITEMS_NAME, BUSS_NAME, BUSS_PIN, GPIO_PIN_DATA)
 from items.models import (ItemName, BussNameType, BussPinType, GpioPinCfg)
 
+
+def delete_items_all():
+    GpioPinCfg.objects.all().delete()
+    BussPinType.objects.all().delete()
+    BussNameType.objects.all().delete()
+    ItemName.objects.all().delete()
 
 def insert_items_name():
     for n, d, np in ITEMS_NAME:
@@ -39,6 +46,7 @@ class Command(BaseCommand):
     help = 'Wstawienie danych urządzeń do bazy.'
 
     def handle(self, *args, **options):
+        delete_items_all()
         insert_items_name()
         insert_buss_name()
         insert_buss_pin()
