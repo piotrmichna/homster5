@@ -115,6 +115,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 STATICFILES_DIRS = [
     '/home/homster/homster_djrr/venv/lib/python3.8/site-packages/django/contrib/admin/static/',
+    '/home/homster/homster_djrr/venv/lib/python3.8/site-packages/rest_framework/static/',
 ]
 
 try:
