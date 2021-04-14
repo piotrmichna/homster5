@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from config.models import CfgCommand, CfgType
+
+admin.site.register(CfgType)
+admin.site.register(CfgCommand)
