@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'items',
     'programs',
+    'config',
 ]
 
 MIDDLEWARE = [
