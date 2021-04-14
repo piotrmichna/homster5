@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class WeatherDayly(models.Model):
+class WeatherDaily(models.Model):
     class Meta:
         verbose_name = 'Pogoda kilkudniowa'
         verbose_name_plural = 'Pogoda kilkudniowa'
@@ -18,8 +18,9 @@ class WeatherLong(models.Model):
     class Meta:
         verbose_name = 'Pogoda'
         verbose_name_plural = 'Pogoda'
-        ordering = ['time_m']
+        ordering = ['date_m']
 
+    date_m = models.DateField(verbose_name='Data pomiarów')
     temp_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Temperatura')
     pres_m = models.PositiveSmallIntegerField(verbose_name='Ciśnienie atmosferyczne')
     humi_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Wilgotność powietrza')
