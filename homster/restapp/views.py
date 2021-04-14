@@ -1,9 +1,9 @@
 from rest_framework import viewsets
 
-from rest.serializers import WeatherDailySerializer
-from weather.models import WeatherDayly
+from restapp.serializers import WeatherDailySerializer
+from weather.models import WeatherDaily
 
 
-class WeatherDailyViewSet(viewsets):
+class WeatherDailyViewSet(viewsets.ModelViewSet):
     serializer_class = WeatherDailySerializer
-    queryset = WeatherDayly.objects.all()
+    queryset = WeatherDaily.objects.all()
