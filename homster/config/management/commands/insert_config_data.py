@@ -1,3 +1,5 @@
+from django.core.management import BaseCommand
+
 from config.management.commands_data.config_data import CFG_TYPE_DATA, CFG_COMMAND_DATA
 from config.models import CfgType, CfgCommand
 
@@ -12,3 +14,11 @@ def insert_cfg_command():
         tp = CfgType.objects.get(name=tn)
         CfgCommand.objects.create(type=tp, name=n, description=d, value=v)
 
+
+class Command(BaseCommand):
+    help = 'Wstawienie danych konfiguracji do bazy.'
+
+    def handle(self, *args, **options):
+        insert_cfg_type()
+        insert_cfg_command()
+        print('Pomyślnie dodano polecenia konfiguracji do bazy.')
