@@ -4,7 +4,7 @@ CFG_TYPE_DATA = [
     ['wthr_mens', 'Ustawienia pomiaru pogody'],
 ]
 
-CFG_COMMAD_DATA = [
+CFG_COMMAND_DATA = [
     ['syst', 'rb_sys', 'Restart systemu', 'False'],
     ['syst', 'pwr_off_sys', 'Wyłączenie systemu', 'False'],
     ['syst', 'updt_sys', 'Aktualizacja oprogramowania', 'False'],

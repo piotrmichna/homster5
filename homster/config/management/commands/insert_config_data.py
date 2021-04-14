@@ -1,5 +1,5 @@
-from config.management.commands_data.config_data import CFG_TYPE_DATA
-from config.models import CfgType
+from config.management.commands_data.config_data import CFG_TYPE_DATA, CFG_COMMAND_DATA
+from config.models import CfgType, CfgCommand
 
 
 def insert_cfg_type():
