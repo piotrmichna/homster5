@@ -5,6 +5,12 @@ from programs.management.commands_data.programs_data import (PROG_NAME_DATA, PRO
 from programs.models import (ProgName, ProgStartTime, ProgPinCfg)
 
 
+def delete_prog_all():
+    ProgPinCfg.objects.all().delete()
+    ProgStartTime.objects.all().delete()
+    ProgName.objects.all().delete()
+
+
 def insert_prog_name():
     for n, d, a in PROG_NAME_DATA:
         ProgName.objects.create(name=n, description=d, active=a)
@@ -28,6 +34,7 @@ class Command(BaseCommand):
     help = 'Wstawienie danych programów do bazy.'
 
     def handle(self, *args, **options):
+        delete_prog_all()
         insert_prog_name()
         insert_prog_start()
         insert_prog_pin()
