@@ -12,3 +12,14 @@ class CfgType(models.Model):
 
     def __str__(self):
         return f'{self.name} ({self.description})'
+
+
+class CfgCommand(models.Model):
+    class Meta:
+        verbose_name = 'Konfiguracja'
+        verbose_name_plural = 'Konfiguracja - komendy'
+        ordering = ['name']
+
+    type = models.ForeignKey(CfgType, on_delete=models.CASCADE, verbose_name='Typ komendy')
+    name = models.CharField(max_length=16, verbose_name='Komenda')
+    value = models.CharField(max_length=16, verbose_name='Wartość')
