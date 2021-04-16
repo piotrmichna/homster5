@@ -21,6 +21,7 @@ class WeatherLongSerializer(serializers.ModelSerializer):
     class Meta:
         model = WeatherLong
         fields = (
+            'id',
             'date_m',
             'temp_m',
             'pres_m',
@@ -43,6 +44,7 @@ class WeatherWeekSerializer(serializers.ModelSerializer):
     class Meta:
         model = WeatherWeek
         fields = (
+            'id',
             'date_m',
             'temp_m',
             'pres_m',
