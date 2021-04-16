@@ -1,6 +1,8 @@
 from rest_framework import viewsets
 
-from restapp.serializers import (WeatherDailySerializer, WeatherLongSerializer, WeatherWeekSerializer)
+from config.models import CfgCommand
+from restapp.serializers import (WeatherDailySerializer, WeatherLongSerializer, WeatherWeekSerializer,
+                                 CfgWeatherSerializer)
 from weather.models import (WeatherDaily, WeatherWeek)
 
 
@@ -17,3 +19,8 @@ class WeatherLongViewSet(viewsets.ModelViewSet):
 class WeatherWeekViewSet(viewsets.ModelViewSet):
     serializer_class = WeatherWeekSerializer
     queryset = WeatherWeek.objects.all()
+
+
+class CfgWeatherViewSet(viewsets.ModelViewSet):
+    serializer_class = CfgWeatherSerializer
+    queryset = CfgCommand.objects.filter(type__name='wthr')
