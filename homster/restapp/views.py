@@ -24,3 +24,13 @@ class WeatherWeekViewSet(viewsets.ModelViewSet):
 class CfgWeatherViewSet(viewsets.ModelViewSet):
     serializer_class = CfgWeatherSerializer
     queryset = CfgCommand.objects.filter(type__name='wthr')
+
+
+class CfgSystemViewSet(viewsets.ModelViewSet):
+    serializer_class = CfgWeatherSerializer
+    queryset = CfgCommand.objects.filter(type__name='syst')
+
+
+class CfgProgramViewSet(viewsets.ModelViewSet):
+    serializer_class = CfgWeatherSerializer
+    queryset = CfgCommand.objects.filter(type__name='prog')
