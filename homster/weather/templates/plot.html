@@ -65,6 +65,25 @@
             chart_pres.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawChartLigh);
+        function drawChartLigh() {
+            var data = google.visualization.arrayToDataTable([
+                ['Data', 'Nasłonecznienie'],
+                    {% for item in ctx %}['{{ item.time_m|date:"m-d H:i" }}', {{ item.ligh_m }}],
+                    {% endfor %}
+            ]);
+            var options = {
+                title: 'Kilkudniowy zapis Nasłonecznienia',
+                vAxis: {title: '', minValue: 0, maxValue: 1000},
+                curveType: 'function',
+                legend: {position: 'bottom'},
+                series: {
+                    0: {color: '#e2ce1e'},
+                }
+            };
+            var chart_ligh = new google.visualization.LineChart(document.getElementById('ligh_chart'));
+            chart_ligh.draw(data, options);
+        }
     </script>
 {% endblock %}
 
