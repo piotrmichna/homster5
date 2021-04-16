@@ -27,41 +27,41 @@
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
             }
-
-
         }
-
     </style>
 
     <link href="/static/css/jumbotron.css" rel="stylesheet">
+    {% block plotscript %}
+    {% endblock %}
 </head>
-<body style="background-image: url(/static/img/1920x1080.png);">
+<body style="background-image: url(/static/img/1920x1080.png); background-repeat: no-repeat;background-attachment: fixed;background-position: center;">
 {% block navbar %}
-    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-info">
-        <a class="navbar-brand" href="#">Navbar</a>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top text-light" style="background-color: #6715ef;opacity: 1">
+        <a class="navbar-brand" href="{% url 'main' %}">Homster5</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
                 aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault" style="opacity: 1">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Programy <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="{% url 'weather' %}">Pogoda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link" href="#">Ustawienia</a>
                 </li>
-                <li class="nav-item dropdown">
+                {#                <li class="nav-item">#}
+                {#                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>#}
+                {#                </li>#}
+                <li class="nav-item dropdown" style="opacity: 1">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                       aria-haspopup="true"
-                       aria-expanded="false">Dropdown</a>
+                       aria-haspopup="true" aria-expanded="false">User</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Ustawienia</a>
+                        <a class="dropdown-item" href="#">Wyloguj</a>
                     </div>
                 </li>
             </ul>
@@ -72,7 +72,7 @@
 <main role="main">
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron" style="opacity: 0.85">
+    <div class="jumbotron" style="opacity: 0.90">
         <div class="container">
             {% block header %}
                 <h1 class="display-3">Hello, world!</h1>
@@ -116,25 +116,26 @@
                 </div>
             </div>
         {% endblock %}
-        <hr>
 
+        <hr>
     </div> <!-- /container -->
 
 </main>
 
-<footer class="container">
+<footer class="container text-light" style="background-color: #6715ef;opacity: 1">
+
     {% block footer %}
         <p>&copy; Company 2017-2021</p>
     {% endblock %}
 </footer>
 
+{% block plotjs %}
+{% endblock %}
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="/static/js/vendor/jquery.slim.min.js"><\/script>')</script>
 <script src="/static/js/bootstrap.bundle.min.js"></script>
-
-
 </body>
 </html>
