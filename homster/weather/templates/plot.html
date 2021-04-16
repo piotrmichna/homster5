@@ -45,6 +45,26 @@
             chart_humi.draw(data, options);
         }
 
+        google.charts.setOnLoadCallback(drawChartPres);
+        function drawChartPres() {
+            var data = google.visualization.arrayToDataTable([
+                ['Data', 'Ciśnienie'],
+                    {% for item in ctx %}['{{ item.time_m|date:"m-d H:i" }}', {{ item.pres_m }}],
+                    {% endfor %}
+            ]);
+            var options = {
+                title: 'Kilkudniowy zapis Ciśnienia atmosferycznego',
+                vAxis: {title: '', minValue: 950, maxValue: 1050},
+                curveType: 'function',
+                legend: {position: 'bottom'},
+                series: {
+                    0: {color: '#63e21e'},
+                }
+            };
+            var chart_pres = new google.visualization.LineChart(document.getElementById('pres_chart'));
+            chart_pres.draw(data, options);
+        }
+
     </script>
 {% endblock %}
 
