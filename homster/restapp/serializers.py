@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from config.models import CfgCommand
 from weather.models import (WeatherDaily, WeatherLong, WeatherWeek)
 
 
@@ -57,4 +58,15 @@ class WeatherWeekSerializer(serializers.ModelSerializer):
             'pres_night_m',
             'humi_night_m',
             'ligh_night_m',
+        )
+
+
+class CfgWeatherSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CfgCommand
+        fields = (
+            'id',
+            'description',
+            'name',
+            'value',
         )
