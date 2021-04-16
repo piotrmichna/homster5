@@ -13,6 +13,9 @@ class WeatherDaily(models.Model):
     humi_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Wilgotność powietrza')
     ligh_m = models.PositiveSmallIntegerField(verbose_name='Nasłonecznienie')
 
+    def __str__(self):
+        return f'{self.time_m.strftime("%Y-%m-%d")} {self.time_m.strftime("%H:%M:%S")} => ({self.temp_m}°C | {self.pres_m}hPa | {self.humi_m}% | {self.ligh_m}lx)'
+
 
 class WeatherLong(models.Model):
     class Meta:
@@ -36,4 +39,7 @@ class WeatherLong(models.Model):
     temp_night_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Temperatura')
     pres_night_m = models.PositiveSmallIntegerField(verbose_name='Ciśnienie atmosferyczne')
     humi_night_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Wilgotność powietrza')
-    ligh_day_m = models.PositiveSmallIntegerField(verbose_name='Nasłonecznienie')
+    ligh_night_m = models.PositiveSmallIntegerField(verbose_name='Nasłonecznienie')
+
+    def __str__(self):
+        return f'{self.time_m} ({self.temp_m}°C | {self.pres_m}hPa | {self.humi_m}% | {self.ligh_m}lx)'
