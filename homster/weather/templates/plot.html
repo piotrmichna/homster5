@@ -4,14 +4,16 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages': ['corechart']});
-
         google.charts.setOnLoadCallback(drawChartTemp);
+
+
         function drawChartTemp() {
             var data = google.visualization.arrayToDataTable([
                 ['Data', 'Temperatura'],
                     {% for item in ctx %}['{{ item.time_m|date:"m-d H:i" }}', {{ item.temp_m }}],
                     {% endfor %}
             ]);
+
             var options = {
                 title: 'Kilkudniowy zapis Temperatur',
                 vAxis: {title: '', minValue: 0, maxValue: 50},
@@ -21,6 +23,7 @@
                     0: {color: '#e2631e'},
                 }
             };
+
             var chart_temp = new google.visualization.LineChart(document.getElementById('temp_chart'));
             chart_temp.draw(data, options);
         }
