@@ -52,13 +52,17 @@ class GpioPinCfg(models.Model):
         verbose_name_plural = '4 Konfiguracja modułów'
         ordering = ['name']
 
-    buss_pin = models.ForeignKey(BussPinType, related_name='gpio_pins', on_delete=models.CASCADE, verbose_name='IO sterownika')
+    buss_pin = models.ForeignKey(BussPinType, related_name='busspin', on_delete=models.CASCADE, verbose_name='IO sterownika')
     name = models.CharField(max_length=16, null=True, verbose_name='Nazwa modułu')
     description = models.CharField(max_length=48, null=True, verbose_name='Opis modułu')
     pin_board = models.PositiveSmallIntegerField(null=False, verbose_name='Numer pinu')
     dir_out = models.BooleanField(null=False, default=True, verbose_name='Kierunek wyjściowy')
     val = models.PositiveSmallIntegerField(null=True, verbose_name='Stan aktualny')
     val_default = models.PositiveSmallIntegerField(null=True, verbose_name='Wartość domyślna')
+
+    class Meta:
+        unique_together = ['buss_pin', 'pin_board']
+        ordering = ['pin_board']
 
     def __str__(self):
         if self.dir_out:
