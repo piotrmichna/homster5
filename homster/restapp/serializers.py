@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from config.models import CfgCommand
+from programs.models import ProgPinCfg
 from weather.models import (WeatherDaily, WeatherLong, WeatherWeek)
 
 
@@ -72,3 +73,15 @@ class CfgWeatherSerializer(serializers.ModelSerializer):
             'name',
             'value',
         )
+
+
+class ProgPinCfgSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgPinCfg
+        fields = [
+            'id',
+            'prog',
+            'pin_cfg',
+            'lp',
+            'duration_sec',
+        ]
