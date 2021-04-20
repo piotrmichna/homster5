@@ -1,9 +1,9 @@
 from rest_framework import viewsets
 
 from config.models import CfgCommand
-from programs.models import ProgName
+from programs.models import ProgName, ProgPinCfg
 from restapp.serializers import (WeatherDailySerializer, WeatherLongSerializer, WeatherWeekSerializer,
-                                 CfgWeatherSerializer, ProgramsCfgSerializer)
+                                 CfgWeatherSerializer, ProgramsCfgSerializer, ProgPinCfgSerializer)
 from weather.models import (WeatherDaily, WeatherWeek)
 
 
@@ -40,3 +40,8 @@ class CfgProgramViewSet(viewsets.ModelViewSet):
 class ProgramsCfgViewSet(viewsets.ModelViewSet):
     serializer_class = ProgramsCfgSerializer
     queryset = ProgName.objects.all().order_by('name')
+
+
+class ProgPinCfgViewSet(viewsets.ModelViewSet):
+    serializer_class = ProgPinCfgSerializer
+    queryset = ProgPinCfg.objects.all().order_by('lp')
