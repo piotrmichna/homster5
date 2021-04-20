@@ -76,13 +76,14 @@ class ProgPinCfg(models.Model):
         ordering = ['lp']
 
     prog = models.ForeignKey(ProgName, related_name='progpin', on_delete=models.CASCADE, verbose_name='Dla programu')
-    pin_cfg = models.ForeignKey(GpioPinCfg, on_delete=models.CASCADE, verbose_name='Pin sterujący')
+    pin_cfg = models.ForeignKey(GpioPinCfg, related_name='gpiopins', on_delete=models.CASCADE,
+                                verbose_name='Pin sterujący')
     lp = models.PositiveSmallIntegerField(default=0, verbose_name='Kolejność')
     duration_sec = models.PositiveSmallIntegerField(default=1, verbose_name='Czas trwania [s]')
 
     class Meta:
-        unique_together = ['prog', 'lp']
-        ordering = ['lp']
+        unique_together = ['prog', 'pin_cfg', 'lp']
+        ordering = ['prog', 'lp']
 
     def __str__(self):
         dur_time = sec_to_tim(self.duration_sec)
