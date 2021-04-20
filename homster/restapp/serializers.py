@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from config.models import CfgCommand
-from programs.models import ProgPinCfg
+from programs.models import ProgPinCfg, ProgStartTime
 from weather.models import (WeatherDaily, WeatherLong, WeatherWeek)
 
 
@@ -84,4 +84,17 @@ class ProgPinCfgSerializer(serializers.ModelSerializer):
             'pin_cfg',
             'lp',
             'duration_sec',
+        ]
+
+
+class ProgStartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgStartTime
+        fields = [
+            'id',
+            'name',
+            'description',
+            'day_delay',
+            'start_time',
+            'active',
         ]
