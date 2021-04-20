@@ -32,7 +32,7 @@ class ProgStartTime(models.Model):
     start_time = models.TimeField(default='07:00:00', verbose_name='Godzina uruchomienia')
     active = models.BooleanField(default=True, verbose_name='Aktywny')
 
-    prog = models.ForeignKey(ProgName, on_delete=models.CASCADE, verbose_name='Dla programu')
+    prog = models.ForeignKey(ProgName, related_name='progstarts', on_delete=models.CASCADE, verbose_name='Dla programu')
 
     def __str__(self):
         if self.active:
@@ -75,10 +75,14 @@ class ProgPinCfg(models.Model):
         verbose_name_plural = '6 Programy - urządzenia'
         ordering = ['lp']
 
-    prog = models.ForeignKey(ProgName, on_delete=models.CASCADE, verbose_name='Dla programu')
+    prog = models.ForeignKey(ProgName, related_name='progpin', on_delete=models.CASCADE, verbose_name='Dla programu')
     pin_cfg = models.ForeignKey(GpioPinCfg, on_delete=models.CASCADE, verbose_name='Pin sterujący')
     lp = models.PositiveSmallIntegerField(default=0, verbose_name='Kolejność')
     duration_sec = models.PositiveSmallIntegerField(default=1, verbose_name='Czas trwania [s]')
+
+    class Meta:
+        unique_together = ['prog', 'lp']
+        ordering = ['lp']
 
     def __str__(self):
         dur_time = sec_to_tim(self.duration_sec)

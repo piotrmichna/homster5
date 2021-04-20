@@ -52,7 +52,7 @@ class GpioPinCfg(models.Model):
         verbose_name_plural = '4 Konfiguracja modułów'
         ordering = ['name']
 
-    buss_pin = models.ForeignKey(BussPinType, on_delete=models.CASCADE, verbose_name='IO sterownika')
+    buss_pin = models.ForeignKey(BussPinType, related_name='gpio_pins', on_delete=models.CASCADE, verbose_name='IO sterownika')
     name = models.CharField(max_length=16, null=True, verbose_name='Nazwa modułu')
     description = models.CharField(max_length=48, null=True, verbose_name='Opis modułu')
     pin_board = models.PositiveSmallIntegerField(null=False, verbose_name='Numer pinu')
