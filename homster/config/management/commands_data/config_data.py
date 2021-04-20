@@ -11,6 +11,7 @@ CFG_COMMAND_DATA = [
     ['prog', 'chk_cmd', 'Rozdzielczość wykonywania poleceń [s]', '1'],
     ['wthr', 'chk_sns', 'Rozdzielczość wykonywania pomiarów [s]', '15'],
     ['wthr', 'sv_sns', 'Rozdzielczość zapisu pomiarów [m]', '15'],
+    ['wthr', 'new_sns', 'Wysłany nowy pomiar pogody', 'False'],
     ['wthr', 'week_sns', 'Zapis średnich tygodniowych', 'True'],
     ['wthr', 'long_sns', 'Zapis średnich dziennych', 'True'],
 ]
