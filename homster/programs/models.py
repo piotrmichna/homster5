@@ -80,6 +80,7 @@ class ProgPinCfg(models.Model):
                                 verbose_name='Pin sterujący')
     lp = models.PositiveSmallIntegerField(default=0, verbose_name='Kolejność')
     duration_sec = models.PositiveSmallIntegerField(default=1, verbose_name='Czas trwania [s]')
+    enabled = models.BooleanField(default=True, verbose_name='Dostępność')
 
     class Meta:
         unique_together = ['prog', 'pin_cfg', 'lp']
