@@ -76,6 +76,16 @@ class CfgWeatherSerializer(serializers.ModelSerializer):
         )
 
 
+class SyncCommandsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CfgCommand
+        fields = (
+            'id',
+            'name',
+            'value',
+        )
+
+
 class GpioPinCfgSerializer(serializers.ModelSerializer):
     class Meta:
         model = GpioPinCfg
