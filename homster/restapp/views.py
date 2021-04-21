@@ -1,9 +1,11 @@
 from rest_framework import viewsets
 
 from config.models import CfgCommand
+from items.models import GpioPinCfg, BussNameType
 from programs.models import ProgName, ProgPinCfg
 from restapp.serializers import (WeatherDailySerializer, WeatherLongSerializer, WeatherWeekSerializer,
-                                 CfgWeatherSerializer, ProgramsCfgSerializer, ProgPinCfgSerializer)
+                                 CfgWeatherSerializer, ProgramsCfgSerializer, ProgPinCfgSerializer,
+                                 GpioPinCfgSerializer)
 from weather.models import (WeatherDaily, WeatherWeek)
 
 
@@ -45,3 +47,9 @@ class ProgramsCfgViewSet(viewsets.ModelViewSet):
 class ProgPinCfgViewSet(viewsets.ModelViewSet):
     serializer_class = ProgPinCfgSerializer
     queryset = ProgPinCfg.objects.all().order_by('lp')
+
+
+class GpioPinCfgViewSet(viewsets.ModelViewSet):
+    serializer_class = GpioPinCfgSerializer
+    buss = BussNameType.objects.get(name='GPIO')
+    queryset = GpioPinCfg.objects.filter(buss_pin__buss_name=buss)

@@ -105,6 +105,7 @@ class ProgPinCfgSerializer(serializers.ModelSerializer):
             'prog',
             'lp',
             'duration_sec',
+            'enabled',
             'pin_cfg',
             'name',
             'pin_board',
@@ -124,6 +125,7 @@ class ProgStartSerializer(serializers.ModelSerializer):
             'day_delay',
             'start_time',
             'active',
+            'prog',
         ]
 
 
