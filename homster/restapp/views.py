@@ -5,7 +5,7 @@ from items.models import GpioPinCfg, BussNameType
 from programs.models import ProgName, ProgPinCfg
 from restapp.serializers import (WeatherDailySerializer, WeatherLongSerializer, WeatherWeekSerializer,
                                  CfgWeatherSerializer, ProgramsCfgSerializer, ProgPinCfgSerializer,
-                                 GpioPinCfgSerializer)
+                                 GpioPinCfgSerializer, SyncCommandsSerializer)
 from weather.models import (WeatherDaily, WeatherWeek)
 
 
@@ -37,6 +37,11 @@ class CfgSystemViewSet(viewsets.ModelViewSet):
 class CfgProgramViewSet(viewsets.ModelViewSet):
     serializer_class = CfgWeatherSerializer
     queryset = CfgCommand.objects.filter(type__name='prog')
+
+
+class SyncViewSet(viewsets.ModelViewSet):
+    serializer_class = SyncCommandsSerializer
+    queryset = CfgCommand.objects.filter(type__name='sync')
 
 
 class ProgramsCfgViewSet(viewsets.ModelViewSet):
