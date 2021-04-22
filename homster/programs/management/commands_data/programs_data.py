@@ -15,4 +15,5 @@ PROG_PIN_DATA = [
     ['Test', 'Sekcja 6', 6, 1],
     ['Test', 'Sekcja 7', 7, 2],
     ['Test', 'Sekcja 8', 8, 1],
+    ['Test', 'Sensor 1', 9, 5],
 ]
