@@ -116,6 +116,7 @@ class ProgPinCfgSerializer(serializers.ModelSerializer):
             'lp',
             'duration_sec',
             'enabled',
+            'parallel',
             'pin_cfg',
             'name',
             'pin_board',
@@ -150,6 +151,8 @@ class ProgramsCfgSerializer(serializers.ModelSerializer):
             'name',
             'description',
             'active',
+            'running',
+            'stop_run',
             'progpin',
             'progstarts',
         ]
