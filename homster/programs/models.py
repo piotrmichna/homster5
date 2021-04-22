@@ -12,6 +12,8 @@ class ProgName(models.Model):
     name = models.CharField(max_length=32, verbose_name="Nazwa programu")
     description = models.CharField(max_length=48, null=True, verbose_name='Opis programu')
     active = models.BooleanField(default=True, verbose_name='Aktywny')
+    running = models.BooleanField(default=False, verbose_name='Aktualnie wykonywany')
+    stop_run = models.BooleanField(default=False, verbose_name='Przerwanie wykonywania')
 
     def __str__(self):
         if self.active:
@@ -81,6 +83,7 @@ class ProgPinCfg(models.Model):
     lp = models.PositiveSmallIntegerField(default=0, verbose_name='Kolejność')
     duration_sec = models.PositiveSmallIntegerField(default=1, verbose_name='Czas trwania [s]')
     enabled = models.BooleanField(default=True, verbose_name='Dostępność')
+    parallel = models.BooleanField(default=False, verbose_name='Praca równoległa do końca programu')
 
     class Meta:
         unique_together = ['prog', 'pin_cfg', 'lp']
