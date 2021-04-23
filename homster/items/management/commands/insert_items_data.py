@@ -1,14 +1,18 @@
 from django.core.management import BaseCommand
+from django.db import connection
 
 from items.management.commands_data.items_data import (ITEMS_NAME, BUSS_NAME, BUSS_PIN, GPIO_PIN_DATA)
 from items.models import (ItemName, BussNameType, BussPinType, GpioPinCfg)
 
 
 def delete_items_all():
-    GpioPinCfg.objects.all().delete()
-    BussPinType.objects.all().delete()
-    BussNameType.objects.all().delete()
-    ItemName.objects.all().delete()
+    print('Usuwanie zawartości tabel aplikacji items')
+    cursor = connection.cursor()
+    cursor.execute("TRUNCATE TABLE items_gpiopincfg RESTART IDENTITY CASCADE")
+    cursor.execute("TRUNCATE TABLE items_busspintype RESTART IDENTITY CASCADE")
+    cursor.execute("TRUNCATE TABLE items_bussnametype RESTART IDENTITY CASCADE")
+    cursor.execute("TRUNCATE TABLE items_itemname RESTART IDENTITY CASCADE")
+
 
 def insert_items_name():
     for n, d, np in ITEMS_NAME:
@@ -40,6 +44,14 @@ def insert_gpio_pin():
         buss_p = BussPinType.objects.get(name=bn)
         GpioPinCfg.objects.create(buss_pin=buss_p, name=n, description=d, pin_board=p, dir_out=do,
                                   val=v, val_default=vd)
+
+
+def insert_items_all():
+    print('Dodanie zawartości tabel aplikacji items')
+    insert_items_name()
+    insert_buss_name()
+    insert_buss_pin()
+    insert_gpio_pin()
 
 
 class Command(BaseCommand):
