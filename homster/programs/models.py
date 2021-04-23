@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.db import models
 
 from items.models import GpioPinCfg
@@ -35,7 +33,7 @@ class ProgStartTime(models.Model):
     description = models.CharField(max_length=32, null=True, verbose_name='Opis startu')
     day_delay = models.PositiveSmallIntegerField(default=0, verbose_name='Ilość dni przerwy')
     start_time = models.TimeField(default='07:00:00', verbose_name='Godzina uruchomienia')
-    next_time = models.DateTimeField(auto_now=True, verbose_name='Następny start')
+    next_time = models.DateTimeField(null=True, verbose_name='Następny start')
     running = models.BooleanField(default=False, verbose_name='Uruchomiony')
     active = models.BooleanField(default=True, verbose_name='Aktywny')
 
