@@ -31,7 +31,7 @@ class ProgStartTime(models.Model):
     name = models.CharField(max_length=16, verbose_name="Nazwa startu")
     description = models.CharField(max_length=32, null=True, verbose_name='Opis startu')
     day_delay = models.PositiveSmallIntegerField(default=0, verbose_name='Ilość dni przerwy')
-    next_start = models.DateTimeField(default='0001-01-01 00:00:00.0', verbose_name='Następny start')
+    next_start = models.DateTimeField(auto_now_add=True, verbose_name='Następny start')
     start_time = models.TimeField(default='07:00:00', verbose_name='Godzina uruchomienia')
     active = models.BooleanField(default=True, verbose_name='Aktywny')
 
