@@ -39,9 +39,9 @@ class ProgStartTime(models.Model):
 
     def __str__(self):
         if self.active:
-            return f'{self.name} - {self.description} | (Aktywny)'
+            return f'{self.next_start} - {self.name} - {self.description} | (Aktywny)'
         else:
-            return f'{self.name} - {self.description} | (Wyłączony)'
+            return f'{self.next_start} - {self.name} - {self.description} | (Wyłączony)'
 
 
 def int_tim_str(n):
