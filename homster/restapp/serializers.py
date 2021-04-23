@@ -134,7 +134,7 @@ class ProgStartSerializer(serializers.ModelSerializer):
             'name',
             'description',
             'day_delay',
-            'next_start',
+            'next_time',
             'start_time',
             'active',
             'prog',

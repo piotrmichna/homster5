@@ -56,7 +56,7 @@ class ProgPinCfgViewSet(viewsets.ModelViewSet):
 
 class ProgStartTimeViewSet(viewsets.ModelViewSet):
     serializer_class = ProgStartSerializer
-    queryset = ProgStartTime.objects.all().order_by('next_start')
+    queryset = ProgStartTime.objects.all().order_by('next_time')
 
 
 class GpioPinCfgViewSet(viewsets.ModelViewSet):

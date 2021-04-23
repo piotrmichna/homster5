@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 from items.models import GpioPinCfg
@@ -26,12 +28,12 @@ class ProgStartTime(models.Model):
     class Meta:
         verbose_name = 'Program - pory uruchomień'
         verbose_name_plural = '7 Programy - pory uruchomień'
-        ordering = ['start_time', 'name']
+        ordering = ['next_time', 'name']
 
     name = models.CharField(max_length=16, verbose_name="Nazwa startu")
     description = models.CharField(max_length=32, null=True, verbose_name='Opis startu')
     day_delay = models.PositiveSmallIntegerField(default=0, verbose_name='Ilość dni przerwy')
-    next_start = models.DateTimeField(auto_now_add=True, verbose_name='Następny start')
+    next_time = models.DateTimeField(default=datetime.now(), verbose_name='Następny start')
     start_time = models.TimeField(default='07:00:00', verbose_name='Godzina uruchomienia')
     active = models.BooleanField(default=True, verbose_name='Aktywny')
 
@@ -39,9 +41,9 @@ class ProgStartTime(models.Model):
 
     def __str__(self):
         if self.active:
-            return f'{self.next_start} - {self.name} - {self.description} | (Aktywny)'
+            return f'{self.next_time} - {self.name} - {self.description} | (Aktywny)'
         else:
-            return f'{self.next_start} - {self.name} - {self.description} | (Wyłączony)'
+            return f'{self.next_time} - {self.name} - {self.description} | (Wyłączony)'
 
 
 def int_tim_str(n):
