@@ -65,13 +65,13 @@ BUSS_PIN = [
 ]
 
 GPIO_PIN_DATA = [
-    ['BOARD19', 'Sekcja 1', 'Nawadnianie sekcja 1', 19, True, 0, 1],
-    ['BOARD21', 'Sekcja 2', 'Nawadnianie sekcja 2', 21, True, 0, 1],
-    ['BOARD21', 'Sekcja 3', 'Nawadnianie sekcja 3', 23, True, 0, 1],
-    ['BOARD21', 'Sekcja 4', 'Nawadnianie sekcja 4', 26, True, 0, 1],
-    ['BOARD21', 'Sekcja 5', 'Nawadnianie sekcja 5', 29, True, 0, 1],
-    ['BOARD21', 'Sekcja 6', 'Nawadnianie sekcja 6', 31, True, 0, 1],
-    ['BOARD21', 'Sekcja 7', 'Nawadnianie sekcja 7', 33, True, 0, 1],
-    ['BOARD21', 'Sekcja 8', 'Nawadnianie sekcja 8', 35, True, 0, 1],
+    ['BOARD19', 'Sekcja 1', 'Nawadnianie sekcja 1', 19, True, 1, 0],
+    ['BOARD21', 'Sekcja 2', 'Nawadnianie sekcja 2', 21, True, 1, 0],
+    ['BOARD21', 'Sekcja 3', 'Nawadnianie sekcja 3', 23, True, 1, 0],
+    ['BOARD21', 'Sekcja 4', 'Nawadnianie sekcja 4', 26, True, 1, 0],
+    ['BOARD21', 'Sekcja 5', 'Nawadnianie sekcja 5', 29, True, 1, 0],
+    ['BOARD21', 'Sekcja 6', 'Nawadnianie sekcja 6', 31, True, 1, 0],
+    ['BOARD21', 'Sekcja 7', 'Nawadnianie sekcja 7', 33, True, 1, 0],
+    ['BOARD21', 'Sekcja 8', 'Nawadnianie sekcja 8', 35, True, 1, 0],
     ['BOARD21', 'Sensor 1', 'Czujnik deszczu', 32, False, 1, 1],
 ]
