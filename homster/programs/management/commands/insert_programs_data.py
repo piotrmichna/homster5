@@ -23,10 +23,10 @@ def insert_prog_start():
 
 
 def insert_prog_pin():
-    for prn, pn, lp, t in PROG_PIN_DATA:
+    for prn, pn, lp, t, par in PROG_PIN_DATA:
         pr = ProgName.objects.get(name=prn)
         pin = GpioPinCfg.objects.get(name=pn)
-        ProgPinCfg.objects.create(prog=pr, pin_cfg=pin, lp=lp, duration_sec=t)
+        ProgPinCfg.objects.create(prog=pr, pin_cfg=pin, lp=lp, duration_sec=t,parallel=par)
         # ['Test', 'Sekcja 1', 1, 2],
 
 

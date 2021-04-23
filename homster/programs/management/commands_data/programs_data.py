@@ -3,17 +3,18 @@ PROG_NAME_DATA = [
 ]
 
 PROG_START_DATA = [
-    ['Start', 'Start testowy', 0, '07:00:00', True, 'Test'],
+    ['Start rano', 'Start testowy', 0, '07:00:00', True, 'Test'],
+    ['Start wieczór', 'Start testowy', 0, '21:00:00', True, 'Test'],
 ]
 
 PROG_PIN_DATA = [
-    ['Test', 'Sekcja 1', 1, 1],
-    ['Test', 'Sekcja 2', 2, 2],
-    ['Test', 'Sekcja 3', 3, 1],
-    ['Test', 'Sekcja 4', 4, 2],
-    ['Test', 'Sekcja 5', 5, 3],
-    ['Test', 'Sekcja 6', 6, 1],
-    ['Test', 'Sekcja 7', 7, 2],
-    ['Test', 'Sekcja 8', 8, 1],
-    ['Test', 'Sensor 1', 9, 5],
+    ['Test', 'Sensor 1', 1, 5, True],
+    ['Test', 'Sekcja 1', 2, 1, False],
+    ['Test', 'Sekcja 2', 3, 2, False],
+    ['Test', 'Sekcja 3', 4, 1, False],
+    ['Test', 'Sekcja 4', 5, 2, False],
+    ['Test', 'Sekcja 5', 6, 3, False],
+    ['Test', 'Sekcja 6', 7, 1, False],
+    ['Test', 'Sekcja 7', 8, 2, False],
+    ['Test', 'Sekcja 8', 9, 1, False],
 ]
