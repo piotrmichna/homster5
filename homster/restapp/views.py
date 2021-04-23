@@ -2,10 +2,10 @@ from rest_framework import viewsets
 
 from config.models import CfgCommand
 from items.models import GpioPinCfg, BussNameType
-from programs.models import ProgName, ProgPinCfg
+from programs.models import ProgName, ProgPinCfg, ProgStartTime
 from restapp.serializers import (WeatherDailySerializer, WeatherLongSerializer, WeatherWeekSerializer,
                                  CfgWeatherSerializer, ProgramsCfgSerializer, ProgPinCfgSerializer,
-                                 GpioPinCfgSerializer, SyncCommandsSerializer)
+                                 GpioPinCfgSerializer, SyncCommandsSerializer, ProgStartSerializer)
 from weather.models import (WeatherDaily, WeatherWeek)
 
 
@@ -52,6 +52,11 @@ class ProgramsCfgViewSet(viewsets.ModelViewSet):
 class ProgPinCfgViewSet(viewsets.ModelViewSet):
     serializer_class = ProgPinCfgSerializer
     queryset = ProgPinCfg.objects.all().order_by('lp')
+
+
+class ProgStartTimeViewSet(viewsets.ModelViewSet):
+    serializer_class = ProgStartSerializer
+    queryset = ProgStartTime.objects.all().order_by('next_start')
 
 
 class GpioPinCfgViewSet(viewsets.ModelViewSet):
