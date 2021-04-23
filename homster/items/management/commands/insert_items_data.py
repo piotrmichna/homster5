@@ -6,6 +6,7 @@ from items.models import (ItemName, BussNameType, BussPinType, GpioPinCfg)
 
 
 def delete_items_all():
+    print('Usuwanie zawartości tabel aplikacji items')
     cursor = connection.cursor()
     cursor.execute("TRUNCATE TABLE items_gpiopincfg RESTART IDENTITY CASCADE")
     cursor.execute("TRUNCATE TABLE items_busspintype RESTART IDENTITY CASCADE")
@@ -46,8 +47,6 @@ def insert_gpio_pin():
 
 
 def insert_items_all():
-    print('Usuwanie zawartości tabel aplikacji items')
-    delete_items_all()
     print('Dodanie zawartości tabel aplikacji items')
     insert_items_name()
     insert_buss_name()

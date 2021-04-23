@@ -7,6 +7,7 @@ from programs.models import (ProgName, ProgStartTime, ProgPinCfg)
 
 
 def delete_prog_all():
+    print('Usuwanie zawartości tabel aplikacji programs')
     cursor = connection.cursor()
     cursor.execute("TRUNCATE TABLE programs_progpincfg RESTART IDENTITY CASCADE")
     cursor.execute("TRUNCATE TABLE programs_progstarttime RESTART IDENTITY CASCADE")
@@ -33,8 +34,6 @@ def insert_prog_pin():
 
 
 def insert_programs_all():
-    print('Usuwanie zawartości tabel aplikacji programs')
-    delete_prog_all()
     print('Dodanie zawartości tabel aplikacji programs')
     insert_prog_name()
     insert_prog_start()

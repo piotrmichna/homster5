@@ -6,6 +6,7 @@ from config.models import CfgType, CfgCommand
 
 
 def delete_cfg_all():
+    print('Usuwanie zawartości tabel aplikacji config')
     cursor = connection.cursor()
     cursor.execute("TRUNCATE TABLE config_cfgcommand RESTART IDENTITY CASCADE")
     cursor.execute("TRUNCATE TABLE config_cfgtype RESTART IDENTITY CASCADE")
@@ -23,8 +24,6 @@ def insert_cfg_command():
 
 
 def insert_command_all():
-    print('Usuwanie zawartości tabel aplikacji config')
-    delete_cfg_all()
     print('Dodanie zawartości tabel aplikacji config')
     insert_cfg_type()
     insert_cfg_command()
