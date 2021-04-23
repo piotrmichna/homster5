@@ -1,4 +1,5 @@
 from django.core.management import BaseCommand
+from django.db import connection
 
 from items.models import GpioPinCfg
 from programs.management.commands_data.programs_data import (PROG_NAME_DATA, PROG_START_DATA, PROG_PIN_DATA)
@@ -6,9 +7,10 @@ from programs.models import (ProgName, ProgStartTime, ProgPinCfg)
 
 
 def delete_prog_all():
-    ProgPinCfg.objects.all().delete()
-    ProgStartTime.objects.all().delete()
-    ProgName.objects.all().delete()
+    cursor = connection.cursor()
+    cursor.execute("TRUNCATE TABLE programs_progpincfg RESTART IDENTITY CASCADE")
+    cursor.execute("TRUNCATE TABLE programs_progstarttime RESTART IDENTITY CASCADE")
+    cursor.execute("TRUNCATE TABLE programs_progname RESTART IDENTITY CASCADE")
 
 
 def insert_prog_name():
@@ -26,8 +28,17 @@ def insert_prog_pin():
     for prn, pn, lp, t, par in PROG_PIN_DATA:
         pr = ProgName.objects.get(name=prn)
         pin = GpioPinCfg.objects.get(name=pn)
-        ProgPinCfg.objects.create(prog=pr, pin_cfg=pin, lp=lp, duration_sec=t,parallel=par)
+        ProgPinCfg.objects.create(prog=pr, pin_cfg=pin, lp=lp, duration_sec=t, parallel=par)
         # ['Test', 'Sekcja 1', 1, 2],
+
+
+def insert_programs_all():
+    print('Usuwanie zawartości tabel aplikacji programs')
+    delete_prog_all()
+    print('Dodanie zawartości tabel aplikacji programs')
+    insert_prog_name()
+    insert_prog_start()
+    insert_prog_pin()
 
 
 class Command(BaseCommand):
