@@ -13,9 +13,9 @@ class ProgName(models.Model):
 
     name = models.CharField(max_length=32, verbose_name="Nazwa programu")
     description = models.CharField(max_length=48, null=True, verbose_name='Opis programu')
-    active = models.BooleanField(default=True, verbose_name='Aktywny')
-    running = models.BooleanField(default=False, verbose_name='Aktualnie wykonywany')
     stop_run = models.BooleanField(default=False, verbose_name='Przerwanie wykonywania')
+    running = models.BooleanField(default=False, verbose_name='Aktualnie wykonywany')
+    active = models.BooleanField(default=True, verbose_name='Aktywny')
 
     def __str__(self):
         if self.active:
@@ -30,14 +30,14 @@ class ProgStartTime(models.Model):
         verbose_name_plural = '7 Programy - pory uruchomień'
         ordering = ['next_time', 'name']
 
+    prog = models.ForeignKey(ProgName, related_name='progstarts', on_delete=models.CASCADE, verbose_name='Dla programu')
     name = models.CharField(max_length=16, verbose_name="Nazwa startu")
     description = models.CharField(max_length=32, null=True, verbose_name='Opis startu')
     day_delay = models.PositiveSmallIntegerField(default=0, verbose_name='Ilość dni przerwy')
     next_time = models.DateTimeField(default=datetime.now(), verbose_name='Następny start')
     start_time = models.TimeField(default='07:00:00', verbose_name='Godzina uruchomienia')
+    running = models.BooleanField(default=False, verbose_name='Uruchomiony')
     active = models.BooleanField(default=True, verbose_name='Aktywny')
-
-    prog = models.ForeignKey(ProgName, related_name='progstarts', on_delete=models.CASCADE, verbose_name='Dla programu')
 
     def __str__(self):
         if self.active:
@@ -85,8 +85,9 @@ class ProgPinCfg(models.Model):
                                 verbose_name='Pin sterujący')
     lp = models.PositiveSmallIntegerField(default=0, verbose_name='Kolejność')
     duration_sec = models.PositiveSmallIntegerField(default=1, verbose_name='Czas trwania [s]')
-    enabled = models.BooleanField(default=True, verbose_name='Dostępność')
+    stop_time = models.TimeField(default=datetime.now().strftime("%H:%M:%S"), verbose_name='Czas zakończenia działania')
     parallel = models.BooleanField(default=False, verbose_name='Praca równoległa do końca programu')
+    active = models.BooleanField(default=True, verbose_name='Dostępność')
 
     class Meta:
         unique_together = ['prog', 'pin_cfg', 'lp']
