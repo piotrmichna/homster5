@@ -85,6 +85,8 @@ class ProgPinCfg(models.Model):
     duration_sec = models.PositiveSmallIntegerField(default=1, verbose_name='Czas trwania [s]')
     stop_time = models.TimeField(default='00:00:00', verbose_name='Czas zakończenia działania')
     parallel = models.BooleanField(default=False, verbose_name='Praca równoległa do końca programu')
+    set_on = models.BooleanField(null=True, default=False, verbose_name='Włącz')
+    set_off = models.BooleanField(null=True, default=False, verbose_name='Wyłącz')
     active = models.BooleanField(default=True, verbose_name='Dostępność')
 
     class Meta:
