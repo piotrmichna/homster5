@@ -13,12 +13,12 @@
 {% block content %}
     <div class="row" style="margin-bottom: 15px">
         <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.9">
-            <h2>Data</h2>
+            <h2>Data[{{ data.num }}]</h2>
             <div id="temp_chart" style="width: 100%"></div>
             <table>
                 <tr>
                     <td><strong>Start dnia</strong></td>
-                    <td>{{ data.day_start }}</td>
+                    <td>{{ data.day_start|date:'Y-m-d H:i:s' }}</td>
                 </tr>
 
                 <tr>
@@ -39,7 +39,7 @@
                 </tr>
                 <tr>
                     <td><strong>Koniec dnia</strong></td>
-                    <td>{{ data.day_stop }}</td>
+                    <td>{{ data.day_stop|date:'Y-m-d H:i:s' }}</td>
                 </tr>
                 <tr>
                     <td>Temperatura nocy</td>
