@@ -9,9 +9,9 @@ class ProgName(models.Model):
         verbose_name_plural = '5 Programy'
         ordering = ['active', 'name']
 
-    name = models.CharField(max_length=32, verbose_name="Nazwa programu")
-    description = models.CharField(max_length=48, null=True, verbose_name='Opis programu')
-    stop_run = models.TimeField(default='00:00:00', verbose_name='Czas zakończenia pracy programu')
+    name = models.CharField(max_length=64, verbose_name="Nazwa programu")
+    description = models.CharField(max_length=128, null=True, verbose_name='Opis programu')
+    set_manual = models.BooleanField(default=False, verbose_name='Uruchom ręcznie')
     running = models.BooleanField(default=False, verbose_name='Aktualnie wykonywany')
     active = models.BooleanField(default=True, verbose_name='Aktywny')
 
@@ -45,32 +45,32 @@ class ProgStartTime(models.Model):
             return f'{self.next_time} - {self.name} - {self.description} | (Wyłączony)'
 
 
-def int_tim_str(n):
-    try:
-        n = int(n)
-    except ValueError:
-        n = 1
-    if n < 10:
-        return f'0{n}'
-    else:
-        return str(n)
-
-
-def sec_to_tim(sec):
-    try:
-        s = int(sec)
-    except ValueError:
-        s = 1
-    m = 0
-    h = 0
-    if sec > 59:
-        m = sec // 60
-        s = sec - m * 60
-        if m > 59:
-            h = m // 60
-            m = m - h * 60
-
-    return int_tim_str(h) + ":" + int_tim_str(m) + ":" + int_tim_str(s)
+# def int_tim_str(n):
+#     try:
+#         n = int(n)
+#     except ValueError:
+#         n = 1
+#     if n < 10:
+#         return f'0{n}'
+#     else:
+#         return str(n)
+#
+#
+# def sec_to_tim(sec):
+#     try:
+#         s = int(sec)
+#     except ValueError:
+#         s = 1
+#     m = 0
+#     h = 0
+#     if sec > 59:
+#         m = sec // 60
+#         s = sec - m * 60
+#         if m > 59:
+#             h = m // 60
+#             m = m - h * 60
+#
+#     return int_tim_str(h) + ":" + int_tim_str(m) + ":" + int_tim_str(s)
 
 
 class ProgPinCfg(models.Model):
@@ -83,7 +83,7 @@ class ProgPinCfg(models.Model):
     pin_cfg = models.ForeignKey(GpioPinCfg, related_name='gpiopins', on_delete=models.CASCADE,
                                 verbose_name='Pin sterujący')
     lp = models.PositiveSmallIntegerField(default=0, verbose_name='Kolejność')
-    duration_sec = models.PositiveSmallIntegerField(default=1, verbose_name='Czas trwania [s]')
+    duration_time = models.TimeField(default='00:00:01', verbose_name='Czas pracy')
     stop_time = models.TimeField(default='00:00:00', verbose_name='Czas zakończenia działania')
     parallel = models.BooleanField(default=False, verbose_name='Praca równoległa do końca programu')
     set_on = models.BooleanField(null=True, default=False, verbose_name='Włącz')
@@ -95,5 +95,5 @@ class ProgPinCfg(models.Model):
         ordering = ['prog', 'lp']
 
     def __str__(self):
-        dur_time = sec_to_tim(self.duration_sec)
-        return f'{self.pin_cfg.name} - {dur_time} | (Aktywny)'
+
+        return f'{self.pin_cfg.name} - {self.duration_time} | (Aktywny)'
