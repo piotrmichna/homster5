@@ -29,6 +29,7 @@ class WeatherCreateDayView(View):
             'ngh_lig': 0,
             'day_start': None,
             'day_stop': None,
+            'day_length':None,
             'day_n': 0,
             'day_tmp': 0,
             'day_prs': 0,
@@ -67,6 +68,7 @@ class WeatherCreateDayView(View):
             data['ngh_prs'] = round(prs / n, 1)
             data['ngh_hum'] = round(hum / n, 1)
             data['ngh_lig'] = round(lig / n, 1)
+            data['day_length'] = data['day_stop'] - data['day_start']
         n = 0
         tmp = 0
         prs = 0
