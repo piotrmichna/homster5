@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block title %} {% endblock %}
+
+{% block header %}
+    <h3 class="display-4">{{ prog.name }}</h3>
+    <h3 class="display-5">{{ prog.description }}</h3>
+    <table>
+
+    </table>
+    {#    <p><a class="btn btn-secondary" href="#" role="button">Pokaż więcej &raquo;</a></p>#}
+{% endblock %}
+
+{% block content %}
+    <div class="row" style="margin-bottom: 15px">
+        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.95">
+            <h2>Szczegóły</h2>
+            <div id="temp_chart" style="width: 100%">
+                <form method="POST">
+                    {% csrf_token %}
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td style="text-align: right">Nazwa</td>
+                            <td><input name="name" type="text" maxlength="64" value="{{ prog.name }}"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Opis</td>
+                            <td><textarea name="description" rows="2" cols="50"
+                                          maxlength="128">{{ prog.description }}</textarea></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Dostępność</td>
+                            <td><select name="active">
+                                {% if prog.active %}
+                                    <option value="True" selected>Tak</option>
+                                    <option value="False">Nie</option>
+                                {% else %}
+                                    <option value="True">Tak</option>
+                                    <option value="False" selected>Nie</option>
+                                {% endif %}
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <button class="btn btn-success btn-sm" type="submit">Zapis</button>
+                                {% if err %}
+                                    <p style="display: inline-block">Uzupełnij pola:
+                                        {% for er in err %}
+                                            {{ er }},
+                                        {% endfor %}</p></td>
+                                {% endif %}
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 15px">
+        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.95">
+            <h2>Lista urządzeń</h2>
+            <div id="temp_chart" style="width: 100%">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Lp</th>
+                        <th scope="col">Nazwa</th>
+                        <th scope="col" style="text-align: center">Równolegle</th>
+                        <th scope="col" style="text-align: center">Czas pracy</th>
+                        <th scope="col" style="text-align: center">Dostępny</th>
+                        <th scope="col" style="text-align: center">Działania</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for it in pgi %}
+                        <tr>
+                            <td>{{ it.lp }}</td>
+                            <td>{{ it.pin_cfg.name }}</td>
+                            {% if it.parallel %}
+                                <td style="text-align: center">TAK</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                            <td style="text-align: center">{{ it.duration_time|date:"H:i:s" }}</td>
+                            {% if it.active %}
+                                <td style="text-align: center">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="active_id" value="{{ it.id }}">
+                                        <input type="hidden" name="active_bool" value="False">
+                                        <button class="btn btn-success btn-sm" type="submit">Tak
+                                        </button>
+                                    </form>
+                                </td>
+                            {% else %}
+                                <td style="text-align: center">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="active_id" value="{{ it.id }}">
+                                        <input type="hidden" name="active_bool" value="True">
+                                        <button class="btn btn-secondary btn-sm" value="submit">Nie
+                                        </button>
+                                    </form>
+                                </td>
+                            {% endif %}
+                            <td style="text-align: center">
+{#                                <form method="POST" style="display: inline-block">#}
+{#                                    {% csrf_token %}#}
+{#                                    <input type="hidden" name="edit_id" value="{{ it.id }}">#}
+{#                                    <button class="btn btn-primary btn-sm" value="submit">Edytuj</button>#}
+{#                                </form>#}
+                                <a class="btn btn-primary btn-sm" style="display: inline-block" href="{% url 'program-item-edit' prog.id it.id %}" role="button">Edytuj</a>
+                                <form method="POST" style="display: inline-block">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="remove_id" value="{{ it.id }}">
+                                    <button class="btn btn-danger btn-sm" value="submit">Usuń</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td scope="col"></td>
+                        <td scope="col"></td>
+                        <td scope="col" style="text-align: center"></td>
+                        <td scope="col" style="text-align: center"></td>
+                        <td scope="col" style="text-align: center"></td>
+                        <td scope="col" style="text-align: center">
+                            <a class="btn btn-success btn-sm" href="{% url 'program-item-add' prog.id %}" role="button">Dodaj urządzenie &raquo;</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}<p>&copy; Company 2017-2021</p>{% endblock %}

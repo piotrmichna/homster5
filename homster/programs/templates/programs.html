@@ -4,62 +4,209 @@
 {% block header %}
     <h3 class="display-4">Programy</h3>
     <p>Szczegułowe informacje o programach.</p>
-{#    <p><a class="btn btn-secondary" href="#" role="button">Pokaż więcej &raquo;</a></p>#}
+    {#    <p><a class="btn btn-secondary" href="#" role="button">Pokaż więcej &raquo;</a></p>#}
 {% endblock %}
 
 {% block content %}
     {% for pr in pgn %}
-        <div class="row" style="margin-bottom: 15px">
-            <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.9">
-                <h2>{{ pr.name }} - {{ pr.description }}</h2>
-                <div id="temp_chart" style="width: 100%; height: 320px">
-                    <table class="table table-striped">
-                        <thead>
+        {% if pr.active == False %}
+            <div class="row" style="margin-bottom: 15px">
+                <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.95">
+                    <table>
                         <tr>
-                            <th scope="col">Data i godzina startu</th>
-                            <th scope="col">Nazwa startu</th>
-                            <th scope="col">Przerwa</th>
-                            <th scope="col">Godzina startu</th>
-                            <th scope="col">Pracuje</th>
-                            <th scope="col">Dostępny</th>
-                            <th scope="col">Działania</th>
+                            <td><h2 style="margin-bottom: auto;margin-top: auto;">{{ pr.name }}</h2></td>
+                            <td style="padding-left: 15px;">
+                                <h5 style="margin-bottom: auto;margin-top: auto;">{{ pr.description }}</h5></td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {% for key, ps in pgs.items %}
-                            {% if key == pr.id %}
-                                {% for st in ps %}
-                                    <tr>
-                                        {% if st.next_time %}
-                                            <td>{{ st.next_time|date:"Y-m-d h:i:s" }}</td>
-                                        {% else %}
-                                            <td>-</td>
-                                        {% endif %}
-                                        <td>{{ st.name }}</td>
-                                        <td>{{ st.day_delay }} dni</td>
-                                        <td>{{ st.start_time|date:"h:i:s"  }}</td>
-                                        {% if st.running %}
-                                            <td><a class="btn btn-danger btn-sm" href="#" role="button">Wyłącz</a></td>
-                                        {% else %}
-                                            <td>-</td>
-                                        {% endif %}
-                                        {% if st.active %}
-                                            <td><a class="btn btn-success btn-sm" href="#" role="button">Wyłącz</a></td>
-                                        {% else %}
-                                            <td><a class="btn btn-secondary btn-sm" href="#" role="button">Włącz</a></td>
-                                        {% endif %}
-                                        <td><a class="btn btn-primary btn-sm" href="#" role="button">Edycja</a>
-                                        <a class="btn btn-danger btn-sm" href="#" role="button">Usuń</a></td>
-                                    </tr>
-                                {% endfor %}
+                        <tr>
+                            <td style="padding-left: 15px;text-align: right">
+                                <h5 style="margin-bottom: auto;margin-top: auto;">Dostępny</h5></td>
+                            {% if pr.active == True %}
+                                <td style="padding-left: 15px;text-align: left">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="pr_active_id" value="{{ pr.id }}">
+                                        <input type="hidden" name="pr_active_bool" value="0">
+                                        <button class="btn btn-success btn-sm" type="submit">Tak
+                                        </button>
+                                    </form>
+                                </td>
+                            {% else %}
+                                <td style="padding-left: 15px;text-align: left">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="pr_active_id" value="{{ pr.id }}">
+                                        <input type="hidden" name="pr_active_bool" value="1">
+                                        <button class="btn btn-secondary btn-sm" value="submit">Nie
+                                        </button>
+                                    </form>
+                                </td>
                             {% endif %}
-                        {% endfor %}
-                        </tbody>
+                        </tr>
                     </table>
-                <p><a class="btn btn-primary" href="#" role="button">Edycja programu &raquo;</a></p>
                 </div>
             </div>
-        </div>
+        {% else %}
+            <div class="row" style="margin-bottom: 15px">
+                <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.95">
+                    <table>
+                        <tr>
+                            <td><h2 style="margin-bottom: auto;margin-top: auto;">{{ pr.name }}</h2></td>
+                            <td style="padding-left: 15px;">
+                                <h5 style="margin-bottom: auto;margin-top: auto;">{{ pr.description }}</h5></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;text-align: right">
+                                <h5 style="margin-bottom: auto;margin-top: auto;">Dostępny</h5></td>
+                            {% if pr.active %}
+                                <td style="padding-left: 15px;text-align: left">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="pr_active_id" value="{{ pr.id }}">
+                                        <input type="hidden" name="pr_active_bool" value="0">
+                                        <button class="btn btn-success btn-sm" type="submit">Tak
+                                        </button>
+                                    </form>
+                                </td>
+                            {% else %}
+                                <td style="padding-left: 15px;text-align: left">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="pr_active_id" value="{{ pr.id }}">
+                                        <input type="hidden" name="pr_active_bool" value="1">
+                                        <button class="btn btn-secondary btn-sm" value="submit">Nie
+                                        </button>
+                                    </form>
+                                </td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 15px;text-align: right">
+                                <h5 style="margin-bottom: auto;margin-top: auto;">Praca</h5></td>
+                            {% if pr.running == False %}
+                                <td style="padding-left: 15px;text-align: left">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="pr_run_id" value="{{ pr.id }}">
+                                        <input type="hidden" name="pr_run_bool" value="0">
+                                        <button class="btn btn-success btn-sm" type="submit">Uruchom ręcznie</button>
+                                    </form>
+                                </td>
+                            {% else %}
+                                <td style="padding-left: 15px;text-align: left">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="pr_run_id" value="{{ pr.id }}">
+                                        <input type="hidden" name="pr_run_bool" value="1">
+                                        <button class="btn btn-secondary btn-sm" value="submit">Przerwij</button>
+                                    </form>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    </table>
+                    <table class="table" style="width: 100%">
+                        <tr>
+                            <td style="text-align: right">
+                                <a class="btn btn-primary btn-sm"
+                                   href="{% url 'program-edit' pr.id %}"
+                                   role="button">Edycja programu &raquo;</a>
+                                <a class="btn btn-danger btn-sm"
+                                   href="{% url 'program-remove' pr.id %}"
+                                   role="button">Usuń program &raquo;</a></td>
+                        </tr>
+                    </table>
+                    <h5 style="margin-bottom: auto;margin-top: auto;"><strong>Zaplanowane uruchomienia</strong></h5>
+                    <div id="temp_chart" style="width: 100%">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Nazwa startu</th>
+                                <th scope="col" style="text-align: center">Przerwa</th>
+                                <th scope="col" style="text-align: center">Start</th>
+                                <th scope="col" style="text-align: center">Stop</th>
+                                <th scope="col" style="text-align: center">Pracuje</th>
+                                <th scope="col" style="text-align: center">Dostępny</th>
+                                <th scope="col" style="text-align: center">Działania</th>
+                            </tr>
+                            </thead>
+                            {% for key, ps in pgs.items %}
+                                {% if key == pr.id %}
+                                    {% for st in ps %}
+                                        <tr>
+                                            <td>{{ st.name }}</td>
+                                            <td style="text-align: center">{{ st.day_delay }} dni</td>
+                                            <td style="text-align: center">{{ st.start_time|date:"H:i:s" }}</td>
+                                            <td style="text-align: center">{{ st.stop_time|date:"H:i:s" }}</td>
+                                            {% if st.running %}
+                                                <td style="text-align: center">
+                                                    <form action="" method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="start_off_id" value="{{ st.id }}">
+                                                        <button class="btn btn-danger btn-sm" type="submit">Wyłącz
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            {% else %}
+                                                <td style="text-align: center">-</td>
+                                            {% endif %}
+                                            {% if st.active %}
+                                                <td style="text-align: center">
+                                                    <form method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="active_id" value="{{ st.id }}">
+                                                        <input type="hidden" name="active_bool" value="0">
+                                                        <button class="btn btn-success btn-sm" type="submit">Tak
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            {% else %}
+                                                <td style="text-align: center">
+                                                    <form method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="active_id" value="{{ st.id }}">
+                                                        <input type="hidden" name="active_bool" value="1">
+                                                        <button class="btn btn-secondary btn-sm" value="submit">Nie
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            {% endif %}
+                                            <td style="text-align: center">
+                                                <a class="btn btn-primary btn-sm" style="display: inline-block"
+                                                   href="{% url 'program-start-edit' pr.id st.id %}"
+                                                   role="button">Edycja</a>
+                                                <form style="display: inline-block" action="" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="delete_id" value="{{ st.id }}">
+                                                    <input type="hidden" name="active_bool" value="1">
+                                                    <button class="btn btn-danger btn-sm" type="submit">Usuń</button>
+                                                    {{ err }}
+                                                </form>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: center">
+                                    <a class="btn btn-success btn-sm"
+                                       href="{% url 'program-start-add' pr.id %}" role="button">Nowy
+                                        start &raquo;</a></td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     {% endfor %}
 
 {% endblock %}
