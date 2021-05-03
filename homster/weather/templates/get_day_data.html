@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %} {% endblock %}
+{% block plotscript %}
+
+{% endblock %}
+
+{% block header %}
+    <h3 class="display-4">Warunki pogodowe</h3>
+    <p>Szczegułowe informacje pogodowe z bierzącego dnia.</p>
+    <p><a class="btn btn-secondary" href="#" role="button">Pokaż więcej &raquo;</a></p>
+{% endblock %}
+
+{% block content %}
+    <div class="row" style="margin-bottom: 15px">
+        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.9">
+            <h2>Data</h2>
+            <div id="temp_chart" style="width: 100%"></div>
+            <table>
+                <tr>
+                    <td><strong>Start dnia</strong></td>
+                    <td>{{ data.day_start }}</td>
+                </tr>
+
+                <tr>
+                    <td>Temperatura dnia</td>
+                    <td>{{ data.day_tmp }}</td>
+                </tr>
+                <tr>
+                    <td>Ciśnienie dnia</td>
+                    <td>{{ data.day_prs }}</td>
+                </tr>
+                <tr>
+                    <td>Wilgotność dnia</td>
+                    <td>{{ data.day_hum }}</td>
+                </tr>
+                <tr>
+                    <td>Nasłonecznienie dnia</td>
+                    <td>{{ data.day_lig }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Koniec dnia</strong></td>
+                    <td>{{ data.day_stop }}</td>
+                </tr>
+                <tr>
+                    <td>Temperatura nocy</td>
+                    <td>{{ data.ngh_tmp }}</td>
+                </tr>
+                <tr>
+                    <td>Ciśnienie nocy</td>
+                    <td>{{ data.ngh_prs }}</td>
+                </tr>
+                <tr>
+                    <td>Wilgotność nocy</td>
+                    <td>{{ data.ngh_hum }}</td>
+                </tr>
+                <tr>
+                    <td>Nasłonecznienie nocy</td>
+                    <td>{{ data.ngh_lig }}</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}<p>&copy; Company 2017-2021</p>{% endblock %}
