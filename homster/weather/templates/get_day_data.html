@@ -17,8 +17,29 @@
             <div id="temp_chart" style="width: 100%"></div>
             <table>
                 <tr>
+                    <td><strong>Średnie dobowy</strong></td>
+                    <td>{{ data.date|date:'Y-m-d' }}</td>
+                </tr>
+
+                <tr>
+                    <td>Temperatura średnia</td>
+                    <td>{{ data.tmp }}</td>
+                </tr>
+                <tr>
+                    <td>Ciśnienie średnie</td>
+                    <td>{{ data.prs }}</td>
+                </tr>
+                <tr>
+                    <td>Wilgotność średnia</td>
+                    <td>{{ data.hum }}</td>
+                </tr>
+                <tr>
+                    <td>Nasłonecznienie średnie</td>
+                    <td>{{ data.lig }}</td>
+                </tr>
+                <tr>
                     <td><strong>Start dnia</strong></td>
-                    <td>{{ data.day_start|date:'Y-m-d H:i:s' }}</td>
+                    <td>{{ data.day_start|date:'H:i:s' }}</td>
                 </tr>
 
                 <tr>
@@ -39,7 +60,7 @@
                 </tr>
                 <tr>
                     <td><strong>Koniec dnia</strong></td>
-                    <td>{{ data.day_stop|date:'Y-m-d H:i:s' }}</td>
+                    <td>{{ data.day_stop|date:'H:i:s' }}</td>
                 </tr>
                 <tr>
                     <td>Temperatura nocy</td>
@@ -59,7 +80,7 @@
                 </tr>
                 <tr>
                     <td><strong>Długość dnia</strong></td>
-                    <td>{{ data.day_length }}</td>
+                    <td>{{ data.day_length|date:'H:i:s' }}</td>
                 </tr>
 
             </table>

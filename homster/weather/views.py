@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import render, redirect
 from django.views import View
 
@@ -21,7 +23,12 @@ class WeatherCreateDayView(View):
             mans = WeatherDaily.objects.filter(time_m__year=yy, time_m__month=mn, time_m__day=dy).order_by(
                 'time_m')
         data = {
-            'num':mans_count,
+            'num': mans_count,
+            'date': datetime.date(year=yy, month=mn, day=dy),
+            'tmp': 0,
+            'prs': 0,
+            'hum': 0,
+            'lig': 0,
             'ngh_n': 0,
             'ngh_tmp': 0,
             'ngh_prs': 0,
@@ -35,6 +42,23 @@ class WeatherCreateDayView(View):
             'day_hum': 0,
             'day_lig': 0,
         }
+        n = 0
+        tmp = 0
+        prs = 0
+        hum = 0
+        lig = 0
+        for man in mans:
+            tmp += man.temp_m
+            prs += man.pres_m
+            hum += man.humi_m
+            lig += man.ligh_m
+            n += 1
+        if n > 0:
+            data['tmp'] = round(tmp / n, 1)
+            data['prs'] = round(prs / n, 1)
+            data['hum'] = round(hum / n, 1)
+            data['lig'] = round(lig / n, 1)
+        mans = WeatherDaily.objects.filter(time_m__year=yy, time_m__month=mn, time_m__day=dy).order_by('time_m')
         n = 0
         tmp = 0
         prs = 0
@@ -68,6 +92,7 @@ class WeatherCreateDayView(View):
             data['ngh_hum'] = round(hum / n, 1)
             data['ngh_lig'] = round(lig / n, 1)
         data['day_length'] = data['day_stop'] - data['day_start']
+
         n = 0
         tmp = 0
         prs = 0
@@ -86,5 +111,12 @@ class WeatherCreateDayView(View):
             data['day_prs'] = round(prs / n, 1)
             data['day_hum'] = round(hum / n, 1)
             data['day_lig'] = round(lig / n, 1)
+        data['day_start'] = data['day_start'].time()
+        data['day_stop'] = data['day_stop'].time()
+        sec = data['day_length'].total_seconds()
+        hr = int(sec // 3600)
+        mn = int((sec % 3600) // 60)
+        ss = int(sec % 60)
+        data['day_length'] = datetime.time(hour=hr, minute=mn, second=ss)
 
         return render(request, 'get_day_data.html', {'data': data})
