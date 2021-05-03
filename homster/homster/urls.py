@@ -23,4 +23,5 @@ urlpatterns = [
     path('', MainView.as_view(), name='main'),
     path('rest/', include('restapp.urls')),
     path('weather/', include('weather.urls')),
+    path('programs/', include('programs.urls')),
 ]

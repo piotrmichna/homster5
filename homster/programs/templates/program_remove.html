@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %} {% endblock %}
+
+{% block header %}
+    <h3 class="display-4">{{ prog.name }}</h3>
+    <h3 class="display-5">{{ prog.description }}</h3>
+    <table>
+
+    </table>
+    {#    <p><a class="btn btn-secondary" href="#" role="button">Pokaż więcej &raquo;</a></p>#}
+{% endblock %}
+
+{% block content %}
+    <div class="row" style="margin-bottom: 15px">
+        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.95">
+            <h2>Usunięcie programu</h2>
+            <div id="temp_chart" style="width: 100%">
+                <form method="POST">
+                    {% csrf_token %}
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td style="text-align: right">Nazwa</td>
+                            <td>{{ prog.name }}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Opis</td>
+                            <td>{{ prog.description }}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Dostępność</td>
+                            <td>
+                                {% if prog.active %}
+                                    Tak
+                                {% else %}
+                                    Nie
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="hidden" name="prof" value="jestem_pewien">
+                                <button class="btn btn-danger btn-sm" type="submit">Usunięcie programu</button>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 15px">
+        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.95">
+            <h2>Czasy uruchomień</h2>
+            <div id="temp_chart" style="width: 100%">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Kolejność</th>
+                        <th scope="col">Nazwa startu</th>
+                        <th scope="col">Przerwa</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">Stop</th>
+                        <th scope="col">Dostępny</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for st in pgs %}
+                        <tr>
+                            {% if st.next_time %}
+                                <td>{{ st.next_time|date:"Y-m-d h:i:s" }}</td>
+                            {% else %}
+                                <td>-</td>
+                            {% endif %}
+                            <td>{{ st.name }}</td>
+                            <td>{{ st.day_delay }} dni</td>
+                            <td>{{ st.start_time|date:"h:i:s" }}</td>
+                            <td>{{ st.stop_time|date:"h:i:s" }}</td>
+                            {% if st.active %}
+                                <td>TAK</td>
+                            {% else %}
+                                <td>NIE</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}<p>&copy; Company 2017-2021</p>{% endblock %}

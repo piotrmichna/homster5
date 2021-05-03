@@ -117,6 +117,8 @@ class ProgPinCfgSerializer(serializers.ModelSerializer):
             'duration_sec',
             'stop_time',
             'parallel',
+            'set_on',
+            'set_off',
             'active',
             'pin_cfg',
             'name',
