@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %} {% endblock %}
+
+{% block header %}
+    <h3 class="display-4">{{ prog.name }}</h3>
+    <h3 class="display-5">{{ prog.description }}</h3>
+    <table>
+
+    </table>
+    {#    <p><a class="btn btn-secondary" href="#" role="button">Pokaż więcej &raquo;</a></p>#}
+{% endblock %}
+
+{% block content %}
+    <div class="row" style="margin-bottom: 15px">
+        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.95">
+            <h2>Nowe urządzenie</h2>
+            <div id="temp_chart" style="width: 100%">
+                <form method="POST">
+                    {% csrf_token %}
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td style="text-align: right">Program</td>
+                            <td><strong>{{ prog.name }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Lp</td>
+                            <td><input type="number" name="lp" value="{{ vrs.lp }}"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Czas pracy</td>
+                            <td><input type="time" name="duration" step="1" value="{{ vrs.duration|date:"H:i:s" }}"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Urządzenie</td>
+                            <td><select name="item">
+                                {% for item in gpio %}
+                                    {% if item.id == vrs.item %}
+                                        <option value="{{ item.id }}"
+                                                selected>{{ item.name }}-{{ item.description }}</option>
+                                    {% else %}
+                                        <option value="{{ item.id }}">{{ item.name }}-{{ item.description }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Praca równoległa</td>
+                            <td><select name="parallel">
+                                {% if vrs.parallel == True %}
+                                    <option value="True" selected>Tak</option>
+                                    <option value="False">Nie</option>
+                                {% else %}
+                                    <option value="True">Tak</option>
+                                    <option value="False" selected>Nie</option>
+                                {% endif %}
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Dostępność</td>
+                            <td><select name="active">
+                                {% if vrs.active == True %}
+                                    <option value="True" selected>Tak</option>
+                                    <option value="False">Nie</option>
+                                {% else %}
+                                    <option value="True">Tak</option>
+                                    <option value="False" selected>Nie</option>
+                                {% endif %}
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <button class="btn btn-success btn-sm" type="submit">Zapis</button>
+                                {% if err %}
+                                    <p style="display: inline-block">Uzupełnij pola:
+                                        {% for er in err %}
+                                            {{ er }},
+                                        {% endfor %}</p></td>
+                                {% endif %}
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}<p>&copy; Company 2017-2021</p>{% endblock %}
