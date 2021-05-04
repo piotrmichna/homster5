@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %} {% endblock %}
+{% block plotscript %}
+
+{% endblock %}
+
+{% block header %}
+    <h3 class="display-4">Warunki pogodowe</h3>
+    <p>Szczegułowe informacje pogodowe z bierzącego dnia.</p>
+    <p><a class="btn btn-secondary" href="#" role="button">Pokaż więcej &raquo;</a></p>
+{% endblock %}
+
+{% block content %}
+    <div class="row" style="margin-bottom: 15px">
+        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.9">
+            <h2>Data[{{ num }}]</h2>
+            <div id="temp_chart" style="width: 100%"></div>
+
+            <table>
+                {% for dat in data %}
+                    {% if dat.wyn == 'ok' %}
+                        <tr>
+                            <td><strong>Średnie dobowy</strong></td>
+                            <td>{{ dat.datax.date|date:'Y-m-d' }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Temperatura średnia</td>
+                            <td>{{ dat.datax.tmp }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ciśnienie średnie</td>
+                            <td>{{ dat.datax.prs }}</td>
+                        </tr>
+                        <tr>
+                            <td>Wilgotność średnia</td>
+                            <td>{{ dat.datax.hum }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nasłonecznienie średnie</td>
+                            <td>{{ dat.datax.lig }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Start dnia</strong></td>
+                            <td>{{ dat.datax.day_start|date:'H:i:s' }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Temperatura dnia</td>
+                            <td>{{ dat.datax.day_tmp }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ciśnienie dnia</td>
+                            <td>{{ dat.datax.day_prs }}</td>
+                        </tr>
+                        <tr>
+                            <td>Wilgotność dnia</td>
+                            <td>{{ dat.datax.day_hum }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nasłonecznienie dnia</td>
+                            <td>{{ dat.datax.day_lig }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Koniec dnia</strong></td>
+                            <td>{{ dat.datax.day_stop|date:'H:i:s' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Temperatura nocy</td>
+                            <td>{{ dat.datax.ngh_tmp }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ciśnienie nocy</td>
+                            <td>{{ dat.datax.ngh_prs }}</td>
+                        </tr>
+                        <tr>
+                            <td>Wilgotność nocy</td>
+                            <td>{{ dat.datax.ngh_hum }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nasłonecznienie nocy</td>
+                            <td>{{ dat.datax.ngh_lig }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Długość dnia</strong></td>
+                            <td>{{ dat.datax.day_length|date:'H:i:s' }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td><strong>Dziń</strong></td>
+                            <td>{{ dat.date|date:'Y-m-d H:i:s' }} - {{ dat.date_to|date:'Y-m-d H:i:s' }}
+                                ==> {{ dat.wyn }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}<p>&copy; Company 2017-2021</p>{% endblock %}
