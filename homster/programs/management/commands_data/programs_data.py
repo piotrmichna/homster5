@@ -8,13 +8,13 @@ PROG_START_DATA = [
 ]
 
 PROG_PIN_DATA = [
-    ['Test', 'Sensor 1', 1, 5, True],
-    ['Test', 'Sekcja 1', 2, 1, False],
-    ['Test', 'Sekcja 2', 3, 2, False],
-    ['Test', 'Sekcja 3', 4, 1, False],
-    ['Test', 'Sekcja 4', 5, 2, False],
-    ['Test', 'Sekcja 5', 6, 3, False],
-    ['Test', 'Sekcja 6', 7, 1, False],
-    ['Test', 'Sekcja 7', 8, 2, False],
-    ['Test', 'Sekcja 8', 9, 1, False],
+    ['Test', 'Sensor 1', 1, '00:00:01', True],
+    ['Test', 'Sekcja 1', 2, '00:00:01', False],
+    ['Test', 'Sekcja 2', 3, '00:00:01', False],
+    ['Test', 'Sekcja 3', 4, '00:00:01', False],
+    ['Test', 'Sekcja 4', 5, '00:00:01', False],
+    ['Test', 'Sekcja 5', 6, '00:00:01', False],
+    ['Test', 'Sekcja 6', 7, '00:00:01', False],
+    ['Test', 'Sekcja 7', 8, '00:00:01', False],
+    ['Test', 'Sekcja 8', 9, '00:00:01', False],
 ]
