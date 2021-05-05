@@ -21,7 +21,7 @@ from homster.views import MainView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainView.as_view(), name='main'),
-    # path('rest/', include('restapp.urls')),
-    # path('weather/', include('weather.urls')),
-    # path('programs/', include('programs.urls')),
+    path('rest/', include('restapp.urls')),
+    path('weather/', include('weather.urls')),
+    path('programs/', include('programs.urls')),
 ]
