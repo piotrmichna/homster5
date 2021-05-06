@@ -9,9 +9,9 @@ class WeatherDaily(models.Model):
 
     time_m = models.DateTimeField(verbose_name='Data i czas pomiaru')
     temp_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Temperatura')
-    pres_m = models.PositiveSmallIntegerField(verbose_name='Ciśnienie atmosferyczne')
+    pres_m = models.DecimalField(max_digits=5, decimal_places=1, verbose_name='Ciśnienie atmosferyczne')
     humi_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Wilgotność powietrza')
-    ligh_m = models.PositiveSmallIntegerField(verbose_name='Nasłonecznienie')
+    ligh_m = models.DecimalField(max_digits=7, decimal_places=1, verbose_name='Nasłonecznienie')
 
     def __str__(self):
         return f'{self.time_m.strftime("%Y-%m-%d")} {self.time_m.strftime("%H:%M:%S")} => ({self.temp_m}°C | {self.pres_m}hPa | {self.humi_m}% | {self.ligh_m}lx)'
