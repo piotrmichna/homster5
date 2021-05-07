@@ -92,7 +92,28 @@
 
 {% block header %}
     <h3 class="display-4">Warunki pogodowe</h3>
-    <p>Szczegułowe informacje pogodowe z bierzącego dnia.</p>
+    <table>
+    <tr>
+        <td style="padding-right:10px;text-align: right"><strong>Czas pomiaru:</strong></td>
+        <td style="text-align: left">{{ wnow.time_m|date:'Y-m-d H:i:s' }}</td>
+    </tr>
+    <tr>
+        <td style="padding-right:10px;text-align: right"><strong>Temperatura:</strong></td>
+        <td style="text-align: left">{{ wnow.temp_m }}°C</td>
+    </tr>
+    <tr>
+        <td style="padding-right:10px;text-align: right"><strong>Ciśnienie:</strong></td>
+        <td style="text-align: left">{{ wnow.temp_m }}hPa</td>
+    </tr>
+    <tr>
+        <td style="padding-right:10px;text-align: right"><strong>Wilgotność:</strong></td>
+        <td style="text-align: left">{{ wnow.humi_m }}%</td>
+    </tr>
+    <tr>
+        <td style="padding-right:10px;text-align: right"><strong>Oświetlenie:</strong></td>
+        <td style="text-align: left">{{ wnow.ligh_m }}lux</td>
+    </tr>
+    </table>
     <p><a class="btn btn-secondary" href="#" role="button">Pokaż więcej &raquo;</a></p>
 {% endblock %}
 

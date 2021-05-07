@@ -9,7 +9,8 @@ from weather.models import WeatherDaily, WeatherLong
 class WeatherChartsView(View):
     def get(self, request):
         queryset = WeatherDaily.objects.all()
-        return render(request, 'plot.html', {'ctx': queryset})
+        weat_now = WeatherDaily.objects.all().order_by('date').last()
+        return render(request, 'plot.html', {'ctx': queryset, 'wnow': weat_now})
 
 
 def get_day_stats(yy: int, mn: int, dy: int):
