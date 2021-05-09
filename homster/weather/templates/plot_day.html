@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block title %} {% endblock %}
+{% block plotscript %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(drawChartTemp);
+
+
+        function drawChartTemp() {
+            var data = google.visualization.arrayToDataTable([
+                ['Data', 'Średnia', 'Dzień', 'Noc'],
+                    {% for item in ctx %}[
+                        '{{ item.time_m|date:"m-d H:i" }}',
+                        {{ item.temp_m }},
+                        {{ item.temp_day_m }},
+                        {{ item.temp_night_m }}
+                        ],
+                    {% endfor %}
+            ]);
+
+            var options = {
+                title: 'Kilkudniowy zapis Temperatur',
+                vAxis: {title: ''},
+                curveType: 'function',
+                legend: {position: 'bottom'},
+                series: {
+                    0: {color: '#e2631e'},
+                }
+            };
+
+            var chart_temp = new google.visualization.LineChart(document.getElementById('temp_chart'));
+            chart_temp.draw(data, options);
+        }
+
+        google.charts.setOnLoadCallback(drawChartHumi);
+
+        function drawChartHumi() {
+            var data = google.visualization.arrayToDataTable([
+                ['Data', 'Wilgotność'],
+                    {% for item in ctx %}['{{ item.time_m|date:"m-d H:i" }}', {{ item.humi_m }}],
+                    {% endfor %}
+            ]);
+            var options = {
+                title: 'Kilkudniowy zapis Wilgotności',
+                vAxis: {title: ''},
+                curveType: 'function',
+                legend: {position: 'bottom'},
+                series: {
+                    0: {color: '#1e8de2'},
+                }
+            };
+            var chart_humi = new google.visualization.LineChart(document.getElementById('humi_chart'));
+            chart_humi.draw(data, options);
+        }
+
+        google.charts.setOnLoadCallback(drawChartPres);
+
+        function drawChartPres() {
+            var data = google.visualization.arrayToDataTable([
+                ['Data', 'Ciśnienie'],
+                    {% for item in ctx %}['{{ item.time_m|date:"m-d H:i" }}', {{ item.pres_m }}],
+                    {% endfor %}
+            ]);
+            var options = {
+                title: 'Kilkudniowy zapis Ciśnienia atmosferycznego',
+                vAxis: {title: ''},
+                curveType: 'function',
+                legend: {position: 'bottom'},
+                series: {
+                    0: {color: '#63e21e'},
+                }
+            };
+            var chart_pres = new google.visualization.LineChart(document.getElementById('pres_chart'));
+            chart_pres.draw(data, options);
+        }
+
+        google.charts.setOnLoadCallback(drawChartLigh);
+
+        function drawChartLigh() {
+            var data = google.visualization.arrayToDataTable([
+                ['Data', 'Nasłonecznienie'],
+                    {% for item in ctx %}['{{ item.time_m|date:"m-d H:i" }}', {{ item.ligh_m }}],
+                    {% endfor %}
+            ]);
+            var options = {
+                title: 'Kilkudniowy zapis Nasłonecznienia',
+                vAxis: {title: ''},
+                curveType: 'function',
+                legend: {position: 'bottom'},
+                series: {
+                    0: {color: '#e2ce1e'},
+                }
+            };
+            var chart_ligh = new google.visualization.LineChart(document.getElementById('ligh_chart'));
+            chart_ligh.draw(data, options);
+        }
+    </script>
+{% endblock %}
+
+{% block header %}
+    <h3 class="display-4">Warunki pogodowe</h3>
+    <table>
+        <tr>
+            <td style="padding-right:10px;text-align: right"><strong>Czas pomiaru:</strong></td>
+            <td style="text-align: left">{{ wnow.time_m|date:'Y-m-d H:i:s' }}</td>
+        </tr>
+        <tr>
+            <td style="padding-right:10px;text-align: right"><strong>Temperatura:</strong></td>
+            <td style="text-align: left">{{ wnow.temp_m }}°C</td>
+        </tr>
+        <tr>
+            <td style="padding-right:10px;text-align: right"><strong>Ciśnienie:</strong></td>
+            <td style="text-align: left">{{ wnow.pres_m }}hPa</td>
+        </tr>
+        <tr>
+            <td style="padding-right:10px;text-align: right"><strong>Wilgotność:</strong></td>
+            <td style="text-align: left">{{ wnow.humi_m }}%</td>
+        </tr>
+        <tr>
+            <td style="padding-right:10px;text-align: right"><strong>Nasłonecznienie:</strong></td>
+            <td style="text-align: left">{{ wnow.ligh_m }}lux</td>
+        </tr>
+    </table>
+    <p><a class="btn btn-secondary" href="#" role="button">Pokaż więcej &raquo;</a></p>
+{% endblock %}
+
+{% block content %}
+    <div class="row" style="margin-bottom: 15px">
+        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.9">
+            <h2>Temperatura</h2>
+            <div id="temp_chart" style="width: 100%; height: 320px"></div>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 15px">
+        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.9">
+            <h2>Wilgotność</h2>
+            <div id="humi_chart" style="width: 100%; height: 320px"></div>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 15px">
+        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.9">
+            <h2>Ciśnienie atmosferyczne</h2>
+            <div id="pres_chart" style="width: 100%; height: 320px"></div>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.9">
+            <h2>Nasłonecznienie</h2>
+            <div id="ligh_chart" style="width: 100%; height: 320px"></div>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}<p>&copy; Company 2017-2021</p>{% endblock %}

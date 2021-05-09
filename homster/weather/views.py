@@ -13,6 +13,13 @@ class WeatherChartsView(View):
         return render(request, 'plot.html', {'ctx': queryset, 'wnow': weat_now})
 
 
+class WeatherChartsDayView(View):
+    def get(self, request):
+        queryset = WeatherLong.objects.all()
+        weat_now = WeatherDaily.objects.order_by('time_m').last()
+        return render(request, 'plot_day.html', {'ctx': queryset, 'wnow': weat_now})
+
+
 def get_day_stats(yy: int, mn: int, dy: int):
     try:
         mans_count = WeatherDaily.objects.filter(time_m__year=yy, time_m__month=mn, time_m__day=dy).order_by(
