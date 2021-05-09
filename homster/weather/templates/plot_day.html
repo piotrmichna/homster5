@@ -61,7 +61,7 @@
 
         function drawChartPres() {
             var data = google.visualization.arrayToDataTable([
-                ['Data', 'Ciśnienie'],
+                ['Data', 'Średnia', 'Dzień', 'Noc'],
                     {% for item in ctx %}['{{ item.date_m|date:"m-d" }}',
                         {{ item.pres_m }},
                         {{ item.pres_day_m }},
@@ -85,7 +85,7 @@
 
         function drawChartLigh() {
             var data = google.visualization.arrayToDataTable([
-                ['Data', 'Nasłonecznienie'],
+                ['Data', 'Średnia', 'Dzień', 'Noc'],
                     {% for item in ctx %}['{{ item.date_m|date:"m-d" }}',
                         {{ item.ligh_m }},
                         {{ item.ligh_day_m }},
