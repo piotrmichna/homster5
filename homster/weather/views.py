@@ -72,7 +72,7 @@ def get_day_stats(yy: int, mn: int, dy: int):
         hum = 0
         lig = 0
         for man in mans:
-            if man.ligh_m >= 2:
+            if man.ligh_m >= 320:
                 data['day_start'] = man.time_m
                 break
             else:
@@ -83,7 +83,7 @@ def get_day_stats(yy: int, mn: int, dy: int):
                 n += 1
         mans = WeatherDaily.objects.filter(time_m__year=yy, time_m__month=mn, time_m__day=dy).order_by('-time_m')
         for man in mans:
-            if man.ligh_m >= 2:
+            if man.ligh_m >= 320:
                 data['day_stop'] = man.time_m
                 break
             else:

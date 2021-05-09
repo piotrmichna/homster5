@@ -11,7 +11,7 @@
             var data = google.visualization.arrayToDataTable([
                 ['Data', 'Średnia', 'Dzień', 'Noc'],
                     {% for item in ctx %}[
-                        '{{ item.time_m|date:"m-d H:i" }}',
+                        '{{ item.time_m|date:"m-d" }}',
                         {{ item.temp_m }},
                         {{ item.temp_day_m }},
                         {{ item.temp_night_m }}
@@ -20,7 +20,7 @@
             ]);
 
             var options = {
-                title: 'Kilkudniowy zapis Temperatur',
+                title: 'Dzienny zapis Temperatur',
                 vAxis: {title: ''},
                 curveType: 'function',
                 legend: {position: 'bottom'},
@@ -37,12 +37,15 @@
 
         function drawChartHumi() {
             var data = google.visualization.arrayToDataTable([
-                ['Data', 'Wilgotność'],
-                    {% for item in ctx %}['{{ item.time_m|date:"m-d H:i" }}', {{ item.humi_m }}],
+                ['Data', 'Średnia', 'Dzień', 'Noc'],
+                    {% for item in ctx %}['{{ item.date_m|date:"m-d" }}',
+                        {{ item.humi_m }},
+                        {{ item.humi_day_m }},
+                        {{ item.humi_night_m }}],
                     {% endfor %}
             ]);
             var options = {
-                title: 'Kilkudniowy zapis Wilgotności',
+                title: 'Dzienny zapis Wilgotności',
                 vAxis: {title: ''},
                 curveType: 'function',
                 legend: {position: 'bottom'},
@@ -59,11 +62,14 @@
         function drawChartPres() {
             var data = google.visualization.arrayToDataTable([
                 ['Data', 'Ciśnienie'],
-                    {% for item in ctx %}['{{ item.time_m|date:"m-d H:i" }}', {{ item.pres_m }}],
+                    {% for item in ctx %}['{{ item.date_m|date:"m-d" }}',
+                        {{ item.pres_m }},
+                        {{ item.pres_day_m }},
+                        {{ item.pres_night_m }}],
                     {% endfor %}
             ]);
             var options = {
-                title: 'Kilkudniowy zapis Ciśnienia atmosferycznego',
+                title: 'Dzienny zapis Ciśnienia atmosferycznego',
                 vAxis: {title: ''},
                 curveType: 'function',
                 legend: {position: 'bottom'},
@@ -80,7 +86,10 @@
         function drawChartLigh() {
             var data = google.visualization.arrayToDataTable([
                 ['Data', 'Nasłonecznienie'],
-                    {% for item in ctx %}['{{ item.time_m|date:"m-d H:i" }}', {{ item.ligh_m }}],
+                    {% for item in ctx %}['{{ item.date_m|date:"m-d" }}',
+                        {{ item.ligh_m }},
+                        {{ item.ligh_day_m }},
+                        {{ item.ligh_night_m }}],
                     {% endfor %}
             ]);
             var options = {
