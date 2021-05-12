@@ -74,7 +74,7 @@ def get_day_stats(yy: int, mn: int, dy: int):
             data['lig'] = round(lig / n, 1)
             while rin.day > 1:
                 rin -= prob_tim
-            data['rin'] = rin.strftime('%H:%M:%S')
+            data['rin'] = rin.time()
         mans = WeatherDaily.objects.filter(time_m__year=yy, time_m__month=mn, time_m__day=dy).order_by('time_m')
         n = 0
         tmp = 0
