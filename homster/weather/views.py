@@ -29,7 +29,7 @@ def get_day_stats(yy: int, mn: int, dy: int):
         return redirect('weather')
     if mans_count > 0:
         prob = CfgCommand.objects.get(name='sv_sns')
-        prob_tim = datetime.timedelta(minutes=prob)
+        prob_tim = datetime.timedelta(minutes=int(prob.value))
         mans = WeatherDaily.objects.filter(time_m__year=yy, time_m__month=mn, time_m__day=dy).order_by(
             'time_m')
         data = {
