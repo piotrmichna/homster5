@@ -12,6 +12,7 @@ class WeatherDaily(models.Model):
     pres_m = models.DecimalField(max_digits=5, decimal_places=1, verbose_name='Ciśnienie atmosferyczne')
     humi_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Wilgotność powietrza')
     ligh_m = models.DecimalField(max_digits=7, decimal_places=1, verbose_name='Nasłonecznienie')
+    rain_m = models.BooleanField(default=False, verbose_name='Opady deszczu')
 
     def __str__(self):
         return f'{self.time_m.strftime("%Y-%m-%d")} {self.time_m.strftime("%H:%M:%S")} => ({self.temp_m}°C | {self.pres_m}hPa | {self.humi_m}% | {self.ligh_m}lx)'
@@ -28,6 +29,7 @@ class WeatherLong(models.Model):
     pres_m = models.DecimalField(max_digits=5, decimal_places=1, verbose_name='Ciśnienie atmosferyczne')
     humi_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Wilgotność powietrza')
     ligh_m = models.DecimalField(max_digits=7, decimal_places=1, verbose_name='Nasłonecznienie')
+    rain_m = models.TimeField(default='00:00:00', verbose_name='Opady deszczu')
 
     time_day_start = models.TimeField(verbose_name='Czas rozpoczęcia dnia')
     time_day_stop = models.TimeField(verbose_name='Czas zakończenia dnia')
@@ -37,10 +39,12 @@ class WeatherLong(models.Model):
     pres_day_m = models.DecimalField(max_digits=5, decimal_places=1, verbose_name='Ciśnienie atmosferyczne')
     humi_day_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Wilgotność powietrza')
     ligh_day_m = models.DecimalField(max_digits=7, decimal_places=1, verbose_name='Nasłonecznienie')
+    rain_day_m = models.TimeField(default='00:00:00', verbose_name='Opady deszczu')
     temp_night_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Temperatura')
     pres_night_m = models.DecimalField(max_digits=5, decimal_places=1, verbose_name='Ciśnienie atmosferyczne')
     humi_night_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Wilgotność powietrza')
     ligh_night_m = models.DecimalField(max_digits=4, decimal_places=1, verbose_name='Nasłonecznienie')
+    rain_night_m = models.TimeField(default='00:00:00', verbose_name='Opady deszczu')
 
     def __str__(self):
         return f'{self.date_m} ({self.temp_m}°C | {self.pres_m}hPa | {self.humi_m}% | {self.ligh_m}lx)'
