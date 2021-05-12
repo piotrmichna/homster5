@@ -11,7 +11,7 @@
             var data = google.visualization.arrayToDataTable([
                 ['Data', 'Średnia', 'Dzień', 'Noc'],
                     {% for item in ctx %}[
-                        '{{ item.time_m|date:"m-d" }}',
+                        '{{ item.date_m|date:"m-d" }}',
                         {{ item.temp_m }},
                         {{ item.temp_day_m }},
                         {{ item.temp_night_m }}
