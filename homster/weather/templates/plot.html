@@ -87,25 +87,7 @@
             var chart_ligh = new google.visualization.LineChart(document.getElementById('ligh_chart'));
             chart_ligh.draw(data, options);
         }
-        google.charts.setOnLoadCallback(drawChartRain);
-        function drawChartRain() {
-            var data = google.visualization.arrayToDataTable([
-                ['Data', 'Opady'],
-                    {% for item in ctx %}['{{ item.time_m|date:"m-d H:i" }}', {{ item.rain_m }}],
-                    {% endfor %}
-            ]);
-            var options = {
-                title: 'Kilkudniowy zapis Opadów',
-                vAxis: {title: ''},
-                curveType: 'function',
-                legend: {position: 'bottom'},
-                series: {
-                    0: {color: '#e2ce1e'},
-                }
-            };
-            var rain_chart = new google.visualization.LineChart(document.getElementById('rain_chart'));
-            rain_chart.draw(data, options);
-        }
+
     </script>
 {% endblock %}
 
@@ -131,10 +113,6 @@
     <tr>
         <td style="padding-right:10px;text-align: right"><strong>Nasłonecznienie:</strong></td>
         <td style="text-align: left">{{ wnow.ligh_m }}lux</td>
-    </tr>
-    <tr>
-        <td style="padding-right:10px;text-align: right"><strong>Opad:</strong></td>
-        <td style="text-align: left">czas: {{ wnow.rain_m }}</td>
     </tr>
     </table>
     <p><a class="btn btn-secondary" href="#" role="button">Pokaż więcej &raquo;</a></p>
@@ -169,12 +147,6 @@
             <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.9">
-            <h2>Opady deszczu</h2>
-            <div id="rain_chart" style="width: 100%; height: 320px"></div>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-        </div>
-    </div>
+
 {% endblock %}
 {% block footer %}<p>&copy; Company 2017-2021</p>{% endblock %}

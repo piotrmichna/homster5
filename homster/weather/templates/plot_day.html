@@ -104,6 +104,26 @@
             var chart_ligh = new google.visualization.LineChart(document.getElementById('ligh_chart'));
             chart_ligh.draw(data, options);
         }
+        google.charts.setOnLoadCallback(drawChartRain);
+        function drawChartRain() {
+            var data = google.visualization.arrayToDataTable([
+                ['Data', 'Opad'],
+                    {% for item in ctx %}['{{ item.date_m|date:"m-d" }}',
+                        {{ item.rain_m }}],
+                    {% endfor %}
+            ]);
+            var options = {
+                title: 'Kilkudniowy zapis Opadów',
+                vAxis: {title: ''},
+                curveType: 'function',
+                legend: {position: 'bottom'},
+                series: {
+                    0: {color: '#e2ce1e'},
+                }
+            };
+            var rain_chart = new google.visualization.LineChart(document.getElementById('rain_chart'));
+            rain_chart.draw(data, options);
+        }
     </script>
 {% endblock %}
 
@@ -160,6 +180,13 @@
         <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.9">
             <h2>Nasłonecznienie</h2>
             <div id="ligh_chart" style="width: 100%; height: 320px"></div>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 bg-white" style="border-radius: 15px; opacity: 0.9">
+            <h2>Opady deszczu</h2>
+            <div id="rain_chart" style="width: 100%; height: 320px"></div>
             <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
         </div>
     </div>
