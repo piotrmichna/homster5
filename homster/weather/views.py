@@ -3,6 +3,7 @@ import datetime
 from django.shortcuts import render, redirect
 from django.views import View
 
+from config.models import CfgCommand
 from weather.models import WeatherDaily, WeatherLong
 
 
@@ -27,6 +28,8 @@ def get_day_stats(yy: int, mn: int, dy: int):
     except WeatherDaily.DoesNotExist:
         return redirect('weather')
     if mans_count > 0:
+        prob = CfgCommand.objects.get(name='sv_sns')
+        prob_tim = datetime.timedelta(minutes=prob)
         mans = WeatherDaily.objects.filter(time_m__year=yy, time_m__month=mn, time_m__day=dy).order_by(
             'time_m')
         data = {
@@ -36,6 +39,7 @@ def get_day_stats(yy: int, mn: int, dy: int):
             'prs': 0,
             'hum': 0,
             'lig': 0,
+            'rin': '00:00:00',
             'ngh_n': 0,
             'ngh_tmp': 0,
             'ngh_prs': 0,
@@ -54,17 +58,23 @@ def get_day_stats(yy: int, mn: int, dy: int):
         prs = 0
         hum = 0
         lig = 0
+        rin = datetime.datetime(1, 1, 1, 0, 0, 0, 0)
         for man in mans:
             tmp += man.temp_m
             prs += man.pres_m
             hum += man.humi_m
             lig += man.ligh_m
+            if man.rain_m:
+                rin += prob_tim
             n += 1
         if n > 0:
             data['tmp'] = round(tmp / n, 1)
             data['prs'] = round(prs / n, 1)
             data['hum'] = round(hum / n, 1)
             data['lig'] = round(lig / n, 1)
+            while rin.day > 1:
+                rin -= prob_tim
+            data['rin'] = rin.strftime('%H:%M:%S')
         mans = WeatherDaily.objects.filter(time_m__year=yy, time_m__month=mn, time_m__day=dy).order_by('time_m')
         n = 0
         tmp = 0
@@ -162,7 +172,7 @@ class WeatherCreateDayView(View):
                     print(f'len(datax)={len(datax)}')
                     data.append({'date': date_get, 'date_to': date_to, 'datax': datax, 'wyn': 'ok'})
                     wl = WeatherLong.objects.create(date_m=datax['date'], temp_m=datax['tmp'], pres_m=datax['prs'],
-                                                    humi_m=datax['hum'], ligh_m=datax['lig'],
+                                                    humi_m=datax['hum'], ligh_m=datax['lig'], rain_m=data['rin'],
                                                     time_day_start=datax['day_start'], time_day_stop=datax['day_stop'],
                                                     time_day=datax['day_length'], temp_day_m=datax['day_tmp'],
                                                     pres_day_m=datax['day_prs'], humi_day_m=datax['day_hum'],
