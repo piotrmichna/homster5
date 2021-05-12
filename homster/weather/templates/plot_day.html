@@ -108,7 +108,7 @@
         function drawChartRain() {
             var data = google.visualization.arrayToDataTable([
                 ['Data', 'Opad'],
-                    {% for item in ctx %}['{{ item.date_m|date:"m-d" }}','{{ item.rain_m }}'],
+                    {% for item in ctx %}['{{ item.date_m|date:"m-d" }}','{{ item.rain_m|date:'H:i:s' }}'],
                     {% endfor %}
             ]);
             var options = {
