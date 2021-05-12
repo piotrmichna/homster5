@@ -74,7 +74,7 @@ def get_day_stats(yy: int, mn: int, dy: int):
             data['lig'] = round(lig / n, 1)
             while rin.day > 1:
                 rin -= prob_tim
-            data['rin'] = rin.time()
+            data['rin'] = rin.strftime('%H:%M:%S')
         mans = WeatherDaily.objects.filter(time_m__year=yy, time_m__month=mn, time_m__day=dy).order_by('time_m')
         n = 0
         tmp = 0
@@ -172,7 +172,7 @@ class WeatherCreateDayView(View):
                     print(f'len(datax)={len(datax)}')
                     data.append({'date': date_get, 'date_to': date_to, 'datax': datax, 'wyn': 'ok'})
                     wl = WeatherLong.objects.create(date_m=datax['date'], temp_m=datax['tmp'], pres_m=datax['prs'],
-                                                    humi_m=datax['hum'], ligh_m=datax['lig'], rain_m=data['rin'],
+                                                    humi_m=datax['hum'], ligh_m=datax['lig'], rain_m=datax['rin'],
                                                     time_day_start=datax['day_start'], time_day_stop=datax['day_stop'],
                                                     time_day=datax['day_length'], temp_day_m=datax['day_tmp'],
                                                     pres_day_m=datax['day_prs'], humi_day_m=datax['day_hum'],
