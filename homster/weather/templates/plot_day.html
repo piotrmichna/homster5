@@ -6,12 +6,10 @@
         google.charts.load('current', {'packages': ['corechart']});
         google.charts.setOnLoadCallback(drawChartTemp);
 
-
         function drawChartTemp() {
             var data = google.visualization.arrayToDataTable([
                 ['Data', 'Średnia', 'Dzień', 'Noc'],
-                    {% for item in ctx %}[
-                        '{{ item.date_m|date:"m-d" }}',
+                    {% for item in ctx %}['{{ item.date_m|date:"m-d" }}',
                         {{ item.temp_m }},
                         {{ item.temp_day_m }},
                         {{ item.temp_night_m }}],
@@ -21,7 +19,7 @@
             var options = {
                 title: 'Dzienny zapis Temperatur',
                 vAxis: {title: ''},
-                curveType: 'function',
+                curveType: 'function', 
                 legend: {position: 'bottom'},
                 series: {
                     0: {color: '#e2631e'},
@@ -33,7 +31,6 @@
         }
 
         google.charts.setOnLoadCallback(drawChartHumi);
-
         function drawChartHumi() {
             var data = google.visualization.arrayToDataTable([
                 ['Data', 'Średnia', 'Dzień', 'Noc'],
@@ -81,7 +78,6 @@
         }
 
         google.charts.setOnLoadCallback(drawChartLigh);
-
         function drawChartLigh() {
             var data = google.visualization.arrayToDataTable([
                 ['Data', 'Średnia', 'Dzień', 'Noc'],
