@@ -81,11 +81,7 @@
         function drawChartLigh() {
             var data = google.visualization.arrayToDataTable([
                 ['Data', 'Średnia', 'Dzień', 'Noc'],
-                    {% for item in ctx %}['{{ item.date_m|date:"m-d" }}',
-                        {{ item.ligh_m }},
-                        {{ item.ligh_day_m }},
-                        {{ item.ligh_night_m }}],
-                    {% endfor %}
+                    {% for item in ctx %}['{{ item.date_m|date:"m-d" }}',{{ item.ligh_m }},{{ item.ligh_day_m }},{{ item.ligh_night_m }}],{% endfor %}
             ]);
             var options = {
                 title: 'Kilkudniowy zapis Nasłonecznienia',
@@ -103,7 +99,7 @@
         function drawChartRain() {
             var data = google.visualization.arrayToDataTable([
                 ['Data', 'Opad'],
-                    {% for item in ctx %}['{{ item.date_m|date:"m-d" }}',{{ item.rain_m|date:'H:i:s' }}],
+                    {% for item in ctx %}['{{ item.date_m|date:"m-d" }}','{{ item.rain_m|date:'H:i:s' }}'],
                     {% endfor %}
             ]);
             var options = {
