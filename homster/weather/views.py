@@ -45,8 +45,8 @@ def get_day_stats(yy: int, mn: int, dy: int):
             'ngh_prs': 0,
             'ngh_hum': 0,
             'ngh_lig': 0,
-            'day_start': None,
-            'day_stop': None,
+            'day_start': 0,
+            'day_stop': 0,
             'day_n': 0,
             'day_tmp': 0,
             'day_prs': 0,
@@ -108,6 +108,8 @@ def get_day_stats(yy: int, mn: int, dy: int):
             data['ngh_prs'] = round(prs / n, 1)
             data['ngh_hum'] = round(hum / n, 1)
             data['ngh_lig'] = round(lig / n, 1)
+        if not data['day_stop'] or not data['day_start']:
+            return None
         data['day_length'] = data['day_stop'] - data['day_start']
 
         n = 0
