@@ -171,16 +171,18 @@ class WeatherCreateDayView(View):
                 if is_stat == 0:
                     date_get = datetime.datetime(yy, mn, dy, 0, 0, 0, 0)
                     datax = get_day_stats(yy, mn, dy)
-                    print(f'len(datax)={len(datax)}')
-                    data.append({'date': date_get, 'date_to': date_to, 'datax': datax, 'wyn': 'ok'})
-                    wl = WeatherLong.objects.create(date_m=datax['date'], temp_m=datax['tmp'], pres_m=datax['prs'],
-                                                    humi_m=datax['hum'], ligh_m=datax['lig'], rain_m=datax['rin'],
-                                                    time_day_start=datax['day_start'], time_day_stop=datax['day_stop'],
-                                                    time_day=datax['day_length'], temp_day_m=datax['day_tmp'],
-                                                    pres_day_m=datax['day_prs'], humi_day_m=datax['day_hum'],
-                                                    ligh_day_m=datax['day_lig'], temp_night_m=datax['ngh_tmp'],
-                                                    pres_night_m=datax['ngh_prs'], humi_night_m=datax['ngh_hum'],
-                                                    ligh_night_m=datax['ngh_lig'])
+                    if datax:
+                        print(f'len(datax)={len(datax)}')
+                        data.append({'date': date_get, 'date_to': date_to, 'datax': datax, 'wyn': 'ok'})
+                        wl = WeatherLong.objects.create(date_m=datax['date'], temp_m=datax['tmp'], pres_m=datax['prs'],
+                                                        humi_m=datax['hum'], ligh_m=datax['lig'], rain_m=datax['rin'],
+                                                        time_day_start=datax['day_start'],
+                                                        time_day_stop=datax['day_stop'],
+                                                        time_day=datax['day_length'], temp_day_m=datax['day_tmp'],
+                                                        pres_day_m=datax['day_prs'], humi_day_m=datax['day_hum'],
+                                                        ligh_day_m=datax['day_lig'], temp_night_m=datax['ngh_tmp'],
+                                                        pres_night_m=datax['ngh_prs'], humi_night_m=datax['ngh_hum'],
+                                                        ligh_night_m=datax['ngh_lig'])
                     wl.save()
                 num += 1
 
