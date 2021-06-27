@@ -183,8 +183,8 @@ class WeatherCreateDayView(View):
                                                         ligh_day_m=datax['day_lig'], temp_night_m=datax['ngh_tmp'],
                                                         pres_night_m=datax['ngh_prs'], humi_night_m=datax['ngh_hum'],
                                                         ligh_night_m=datax['ngh_lig'])
-                    wl.save()
-                num += 1
+                        wl.save()
+                        num += 1
 
             date_get = date_get + datetime.timedelta(1)
 
